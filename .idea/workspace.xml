@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9a47b992-4def-4112-8071-f791dc7eed22" name="Changes" comment="Accidentally created file">
+    <list default="true" id="9a47b992-4def-4112-8071-f791dc7eed22" name="Changes" comment="Немного улучшена читаемость кода">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainWindow.py" beforeDir="false" afterPath="$PROJECT_DIR$/MainWindow.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SecondWindow.py" beforeDir="false" afterPath="$PROJECT_DIR$/SecondWindow.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.db" beforeDir="false" afterPath="$PROJECT_DIR$/data.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -188,7 +186,21 @@
       <option name="project" value="LOCAL" />
       <updated>1685177922395</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Введены исходные данные">
+      <created>1685180728423</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1685180728423</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Немного улучшена читаемость кода">
+      <created>1685180760788</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1685180760788</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -221,6 +233,8 @@
     <MESSAGE value="Добавлена работа с базой данных" />
     <MESSAGE value="Other changes" />
     <MESSAGE value="Accidentally created file" />
-    <option name="LAST_COMMIT_MESSAGE" value="Accidentally created file" />
+    <MESSAGE value="Введены исходные данные" />
+    <MESSAGE value="Немного улучшена читаемость кода" />
+    <option name="LAST_COMMIT_MESSAGE" value="Немного улучшена читаемость кода" />
   </component>
 </project>
