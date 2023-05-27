@@ -1,7 +1,3 @@
-#QListWidget
-#Resolution
-#exe startup
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMenuBar, QMenu, QFileDialog
 from datetime import datetime
