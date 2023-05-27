@@ -1,8 +1,12 @@
+#QListWidget
+#Resolution
+#exe startup
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMenuBar, QMenu, QFileDialog
 from datetime import datetime
 from SecondWindow import Ui_SecondWindow
+
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -474,11 +478,13 @@ class Ui_MainWindow(object):
         self.ui = Ui_SecondWindow()
         self.ui.setupUi(self.window, date)
         self.window.show()
+
     def change_resolution(self, resolution):
         if resolution == "1920x1080":
             MainWindow.resize(1920, 1080)
         elif resolution == "800x600":
             MainWindow.resize(800, 600)
+
     def change_background(self, background):
         if background == "Darkside":
             self.label.setPixmap(QtGui.QPixmap())
@@ -495,9 +501,13 @@ class Ui_MainWindow(object):
             new_background = QFileDialog.getOpenFileName()[0]
             self.label.setPixmap(QtGui.QPixmap(new_background))
             self.Month_year.setStyleSheet("color: rgb(255, 255, 255)");
+
     def change_font(self, font):
         if font == "Bold":
-            self.Month_year.setStyleSheet("font-weight: bold");
+            if self.get_backgroud_color() == "#000000":
+                self.Month_year.setStyleSheet("font-weight: bold; color: rgb(255, 255, 255)");
+            else:
+                self.Month_year.setStyleSheet("font-weight: bold; color: rgb(0, 0, 0)");
             self.Monday.setStyleSheet("font-weight: bold");
             self.Tuesday.setStyleSheet("font-weight: bold");
             self.Wednesday.setStyleSheet("font-weight: bold");
@@ -506,7 +516,10 @@ class Ui_MainWindow(object):
             self.Saturday.setStyleSheet("font-weight: bold");
             self.Sunday.setStyleSheet("font-weight: bold");
         elif font == "Normal":
-            self.Month_year.setStyleSheet("font-weight: normal");
+            if self.get_backgroud_color() == "#000000":
+                self.Month_year.setStyleSheet("font-weight: normal; color: rgb(255, 255, 255)");
+            else:
+                self.Month_year.setStyleSheet("font-weight: normal; color: rgb(0, 0, 0)");
             self.Monday.setStyleSheet("font-weight: normal");
             self.Tuesday.setStyleSheet("font-weight: normal");
             self.Wednesday.setStyleSheet("font-weight: normal");
@@ -514,6 +527,10 @@ class Ui_MainWindow(object):
             self.Friday.setStyleSheet("font-weight: normal");
             self.Saturday.setStyleSheet("font-weight: normal");
             self.Sunday.setStyleSheet("font-weight: normal");
+
+    def get_backgroud_color(self):
+        return self.label.palette().window().color().name()
+
     def exit_app(self):
         sys.exit()
 

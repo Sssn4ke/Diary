@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9a47b992-4def-4112-8071-f791dc7eed22" name="Changes" comment="Загрузка файл backend">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="9a47b992-4def-4112-8071-f791dc7eed22" name="Changes" comment="Accidentally created file">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend.py" beforeDir="false" afterPath="$PROJECT_DIR$/Backend.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MainWindow.py" beforeDir="false" afterPath="$PROJECT_DIR$/MainWindow.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SecondWindow.py" beforeDir="false" afterPath="$PROJECT_DIR$/SecondWindow.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data.db" beforeDir="false" afterPath="$PROJECT_DIR$/data.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -154,7 +153,42 @@
       <option name="project" value="LOCAL" />
       <updated>1685140760642</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="База данных для приложения">
+      <created>1685175459413</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1685175459413</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Добавлен функционал приложения">
+      <created>1685175499858</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1685175499858</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Добавлена работа с базой данных">
+      <created>1685175580702</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1685175580702</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Other changes">
+      <created>1685175605726</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1685175605726</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Accidentally created file">
+      <created>1685177922395</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1685177922395</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -182,6 +216,11 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Загрузка файл backend" />
-    <option name="LAST_COMMIT_MESSAGE" value="Загрузка файл backend" />
+    <MESSAGE value="База данных для приложения" />
+    <MESSAGE value="Добавлен функционал приложения" />
+    <MESSAGE value="Добавлена работа с базой данных" />
+    <MESSAGE value="Other changes" />
+    <MESSAGE value="Accidentally created file" />
+    <option name="LAST_COMMIT_MESSAGE" value="Accidentally created file" />
   </component>
 </project>

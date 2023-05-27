@@ -1,9 +1,7 @@
 import sqlite3
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QListWidgetItem
 from PyQt5.QtWidgets import *
 
-tasks = ["adad", "adqwdw"]
 class Ui_SecondWindow(object):
     def setupUi(self, SecondWindow, today_date):
         SecondWindow.setObjectName("SecondWindow")
@@ -84,6 +82,12 @@ class Ui_SecondWindow(object):
         db = sqlite3.connect("data.db")
         cursor = db.cursor()
 
+        task_time_qt = self.timeEdit.time()
+        task_time = task_time_qt.toString("hh:mm")
+
+        if task_time != "00:00":
+            new_task = new_task + ' - ' + task_time
+
         query = "INSERT INTO Tasks(task, completed, date) VALUES (?,?,?)"
         row = (new_task, 0, date,)
 
@@ -92,6 +96,7 @@ class Ui_SecondWindow(object):
 
         self.save_changes(date)
         self.update_tasks(date)
+
     def update_tasks(self, date):
         self.listWidget.clear()
 
@@ -101,6 +106,7 @@ class Ui_SecondWindow(object):
         query = "SELECT task, completed FROM Tasks Where date = ?"
         row = (date, )
         results = cursor.execute(query, row).fetchall()
+
         for result in results:
             item = QListWidgetItem(str(result[0]))
             item.setFlags(item.flags() | QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEditable)
@@ -123,6 +129,7 @@ class Ui_SecondWindow(object):
                 query = "UPDATE Tasks SET completed = 0 WHERE task = ? and date = ?"
             row = (task, date,)
             cursor.execute(query, row)
+
         db.commit()
 
 if __name__ == "__main__":
