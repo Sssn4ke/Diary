@@ -1,7 +1,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-
-def add_label():
-    print("add")
-
+from MainWindow import Ui_MainWindow
 class Ui_MainWindow(object):
-    self.p2.clicked.connect(add_label)
+    def add_label(self, MainWindow):
+        print("add")
+    def add_logics(self, MainWindow):
+        self.p2.clicked.connect(self.add_label)
