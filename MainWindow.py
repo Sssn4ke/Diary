@@ -5,6 +5,7 @@ from SecondWindow import Ui_SecondWindow
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
+        '''Строит дерево виджетов и элементы интерфейса.'''
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 600)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -326,6 +327,7 @@ class Ui_MainWindow(object):
         self.add_functions()
 
     def retranslateUi(self, MainWindow):
+        '''Устанавливает текст и заголовки виджетов.'''
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Diary"))
         self.Month_year.setText(_translate("MainWindow", "Month and year"))
@@ -391,6 +393,7 @@ class Ui_MainWindow(object):
         self.actionBold.setText(_translate("MainWindow", "Bold"))
 
     def add_functions(self):
+        '''Добавляет все необходимые функции для корректной работы приложения.'''
         self.set_month_and_date()
         self.set_dates()
 
@@ -448,6 +451,7 @@ class Ui_MainWindow(object):
         self.actionExit.triggered.connect(lambda: self.exit_app())
 
     def openWindow(self, opened_day):
+        '''Открывает окно SecondWindow.py при нажатии на кнопку в календаре.'''
         current_datetime = datetime.now()
         currentMonth = datetime.now().month
         currentYear = current_datetime.strftime("%Y")
@@ -458,6 +462,7 @@ class Ui_MainWindow(object):
         self.window.show()
 
     def change_background(self, background):
+        '''Меняет задний фон приложения.'''
         if background == "Darkside":
             self.label.setPixmap(QtGui.QPixmap())
             self.label.setStyleSheet("background-color: rgb(0, 0, 0);")
@@ -475,6 +480,7 @@ class Ui_MainWindow(object):
             self.Month_year.setStyleSheet("color: rgb(255, 255, 255)");
 
     def change_font(self, font):
+        '''Меняет шрифт в приложении.'''
         if font == "Bold":
             if self.get_backgroud_color() == "#000000":
                 self.Month_year.setStyleSheet("font-weight: bold; color: rgb(255, 255, 255)");
@@ -501,18 +507,22 @@ class Ui_MainWindow(object):
             self.Sunday.setStyleSheet("font-weight: normal");
 
     def get_backgroud_color(self):
+        '''Возвращает цвет заднего фона.'''
         return self.label.palette().window().color().name()
 
     def exit_app(self):
+        '''Функция для выхода из приложения путем нажатия кнопки.'''
         sys.exit()
 
     def set_month_and_date(self):
+        '''Устанавливает текущие год и месяц.'''
         current_datetime = datetime.now()
         currentMonth = current_datetime.strftime("%B")
         currentYear = current_datetime.strftime("%Y")
         self.Month_year.setText(currentMonth + ' ' + currentYear)
 
     def set_dates(self):
+        '''Устанавливает даты на кнопки в календаре.'''
         self.p1.setText("1")
         self.p2.setText("2")
         self.p3.setText("3")

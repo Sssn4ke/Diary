@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import *
 
 class Ui_SecondWindow(object):
     def setupUi(self, SecondWindow, today_date):
+        '''Строит дерево виджетов и элементы интерфейса.'''
         SecondWindow.setObjectName("SecondWindow")
         SecondWindow.resize(400, 600)
         self.centralwidget = QtWidgets.QWidget(SecondWindow)
@@ -39,6 +40,7 @@ class Ui_SecondWindow(object):
         self.add_functions(today_date)
 
     def retranslateUi(self, SecondWindow):
+        '''Устанавливает текст и заголовки виджетов.'''
         _translate = QtCore.QCoreApplication.translate
         SecondWindow.setWindowTitle(_translate("SecondWindow", "Timetable"))
         __sortingEnabled = self.listWidget.isSortingEnabled()
@@ -47,11 +49,13 @@ class Ui_SecondWindow(object):
         self.button_for_adding.setText(_translate("SecondWindow", "Add"))
 
     def add_functions(self, today_date):
+        '''Добавляет все необходимые функции для корректной работы приложения.'''
         self.update_tasks(today_date)
 
         self.button_for_adding.clicked.connect(lambda: self.add_task(self.textEdit.toPlainText(), today_date))
 
     def add_task(self, new_task, date):
+        '''Добавляет задачу в базу данных.'''
         db = sqlite3.connect("data.db")
         cursor = db.cursor()
 
@@ -71,6 +75,7 @@ class Ui_SecondWindow(object):
         self.update_tasks(date)
 
     def update_tasks(self, date):
+        '''Обновляет список с задачами из базы данных.'''
         self.listWidget.clear()
 
         db = sqlite3.connect("data.db")
@@ -90,6 +95,7 @@ class Ui_SecondWindow(object):
             self.listWidget.addItem(item)
 
     def save_changes(self, date):
+        '''Сохраняет изменения в базу данных.'''
         db = sqlite3.connect("data.db")
         cursor = db.cursor()
 
