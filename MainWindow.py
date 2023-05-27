@@ -293,13 +293,9 @@ class Ui_MainWindow(object):
         self.menuBackground.setObjectName("menuBackground")
         self.menuTypescreen = QtWidgets.QMenu(self.menuSettings)
         self.menuTypescreen.setObjectName("menuTypescreen")
-        self.menuScreenResolution = QtWidgets.QMenu(self.menuSettings)
-        self.menuScreenResolution.setObjectName("menuScreenResolution")
         MainWindow.setMenuBar(self.menubar)
         self.actionExit = QtWidgets.QAction(MainWindow)
         self.actionExit.setObjectName("actionExit")
-        self.actionScreen_resolution = QtWidgets.QAction(MainWindow)
-        self.actionScreen_resolution.setObjectName("actionScreen_resolution")
         self.actionDarkside = QtWidgets.QAction(MainWindow)
         self.actionDarkside.setObjectName("actionDarkside")
         self.actionWhiteside = QtWidgets.QAction(MainWindow)
@@ -312,21 +308,14 @@ class Ui_MainWindow(object):
         self.actionNormal.setObjectName("actionNormal")
         self.actionBold = QtWidgets.QAction(MainWindow)
         self.actionBold.setObjectName("actionBold")
-        self.action1920x1080 = QtWidgets.QAction(MainWindow)
-        self.action1920x1080.setObjectName("action1920x1080")
-        self.action800x600 = QtWidgets.QAction(MainWindow)
-        self.action800x600.setObjectName("action800x600")
         self.menuBackground.addAction(self.actionDarkside)
         self.menuBackground.addAction(self.actionWhiteside)
         self.menuBackground.addAction(self.actionColorful_side)
         self.menuBackground.addAction(self.actionYour_side)
         self.menuTypescreen.addAction(self.actionNormal)
         self.menuTypescreen.addAction(self.actionBold)
-        self.menuScreenResolution.addAction(self.action1920x1080)
-        self.menuScreenResolution.addAction(self.action800x600)
         self.menuSettings.addSeparator()
         self.menuSettings.addAction(self.menuBackground.menuAction())
-        self.menuSettings.addAction(self.menuScreenResolution.menuAction())
         self.menuSettings.addAction(self.menuTypescreen.menuAction())
         self.menuSettings.addAction(self.actionExit)
         self.menubar.addAction(self.menuSettings.menuAction())
@@ -394,16 +383,12 @@ class Ui_MainWindow(object):
         self.menuBackground.setTitle(_translate("MainWindow", "Background"))
         self.menuTypescreen.setTitle(_translate("MainWindow", "Typescreen"))
         self.actionExit.setText(_translate("MainWindow", "Exit"))
-        self.actionScreen_resolution.setText(_translate("MainWindow", "Screen resolution"))
         self.actionDarkside.setText(_translate("MainWindow", "Darkside"))
         self.actionWhiteside.setText(_translate("MainWindow", "White side"))
         self.actionColorful_side.setText(_translate("MainWindow", "Colorful side"))
         self.actionYour_side.setText(_translate("MainWindow", "Your side"))
         self.actionNormal.setText(_translate("MainWindow", "Normal"))
         self.actionBold.setText(_translate("MainWindow", "Bold"))
-        self.menuScreenResolution.setTitle(_translate("MainWindow", "Screen Resolution"))
-        self.action1920x1080.setText(_translate("MainWindow", "1920x1080"))
-        self.action800x600.setText(_translate("MainWindow", "800x600"))
 
     def add_functions(self):
         self.set_month_and_date()
@@ -462,9 +447,6 @@ class Ui_MainWindow(object):
 
         self.actionExit.triggered.connect(lambda: self.exit_app())
 
-        self.action1920x1080.triggered.connect(lambda: self.change_resolution(self.action1920x1080.text()))
-        self.action800x600.triggered.connect(lambda: self.change_resolution(self.action800x600.text()))
-
     def openWindow(self, opened_day):
         current_datetime = datetime.now()
         currentMonth = datetime.now().month
@@ -474,12 +456,6 @@ class Ui_MainWindow(object):
         self.ui = Ui_SecondWindow()
         self.ui.setupUi(self.window, date)
         self.window.show()
-
-    def change_resolution(self, resolution):
-        if resolution == "1920x1080":
-            MainWindow.resize(1920, 1080)
-        elif resolution == "800x600":
-            MainWindow.resize(800, 600)
 
     def change_background(self, background):
         if background == "Darkside":
