@@ -1,9 +1,11 @@
-
+import sqlite3
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QListWidgetItem
+from PyQt5.QtWidgets import *
 
-
+tasks = ["adad", "adqwdw"]
 class Ui_SecondWindow(object):
-    def setupUi(self, SecondWindow):
+    def setupUi(self, SecondWindow, today_date):
         SecondWindow.setObjectName("SecondWindow")
         SecondWindow.resize(400, 600)
         self.listWidget = QtWidgets.QListWidget(SecondWindow)
@@ -51,11 +53,11 @@ class Ui_SecondWindow(object):
         self.listWidget.setCurrentRow(-1)
         QtCore.QMetaObject.connectSlotsByName(SecondWindow)
 
+        self.add_functions(today_date)
+
     def retranslateUi(self, SecondWindow):
         _translate = QtCore.QCoreApplication.translate
         SecondWindow.setWindowTitle(_translate("SecondWindow", "Timetable"))
-        self.listWidget.setSortingEnabled(False)
-        __sortingEnabled = self.listWidget.isSortingEnabled()
         self.listWidget.setSortingEnabled(False)
         item = self.listWidget.item(0)
         item.setText(_translate("SecondWindow", "For_test"))
@@ -70,10 +72,58 @@ class Ui_SecondWindow(object):
         item = self.listWidget.item(5)
         item.setText(_translate("SecondWindow", "in"))
         item = self.listWidget.item(6)
-        item.setText(_translate("SecondWindow", "listwidget"))
-        self.listWidget.setSortingEnabled(__sortingEnabled)
+        item.setText(_translate("SecondWindow", "Пока дел нет"))
         self.button_for_adding.setText(_translate("SecondWindow", "Add"))
 
+    def add_functions(self, today_date):
+        self.update_tasks(today_date)
+
+        self.button_for_adding.clicked.connect(lambda: self.add_task(self.textEdit.toPlainText(), today_date))
+
+    def add_task(self, new_task, date):
+        db = sqlite3.connect("data.db")
+        cursor = db.cursor()
+
+        query = "INSERT INTO Tasks(task, completed, date) VALUES (?,?,?)"
+        row = (new_task, 0, date,)
+
+        cursor.execute(query,row)
+        db.commit()
+
+        self.save_changes(date)
+        self.update_tasks(date)
+    def update_tasks(self, date):
+        self.listWidget.clear()
+
+        db = sqlite3.connect("data.db")
+        cursor = db.cursor()
+
+        query = "SELECT task, completed FROM Tasks Where date = ?"
+        row = (date, )
+        results = cursor.execute(query, row).fetchall()
+        for result in results:
+            item = QListWidgetItem(str(result[0]))
+            item.setFlags(item.flags() | QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEditable)
+            if result[1] == 1:
+                item.setCheckState(QtCore.Qt.Checked)
+            elif result[1] == 0:
+                item.setCheckState(QtCore.Qt.Unchecked)
+            self.listWidget.addItem(item)
+
+    def save_changes(self, date):
+        db = sqlite3.connect("data.db")
+        cursor = db.cursor()
+
+        for i in range(self.listWidget.count()):
+            item = self.listWidget.item(i)
+            task = item.text()
+            if item.checkState() == QtCore.Qt.Checked:
+                query = "UPDATE Tasks SET completed = 1 WHERE task = ? and date = ?"
+            else:
+                query = "UPDATE Tasks SET completed = 0 WHERE task = ? and date = ?"
+            row = (task, date,)
+            cursor.execute(query, row)
+        db.commit()
 
 if __name__ == "__main__":
     import sys
