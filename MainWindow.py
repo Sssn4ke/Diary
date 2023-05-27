@@ -1,7 +1,8 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
-
+from PyQt5.QtWidgets import QMenuBar, QMenu, QFileDialog
+from datetime import datetime
+from SecondWindow import Ui_SecondWindow
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -31,7 +32,7 @@ class Ui_MainWindow(object):
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(0, 0, 801, 581))
         self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("../../../Downloads/background_of_diary.jpg"))
+        self.label.setPixmap(QtGui.QPixmap("D:/Загрузки/background_of_diary.jpg"))
         self.label.setObjectName("label")
         self.p2 = QtWidgets.QPushButton(self.centralwidget)
         self.p2.setGeometry(QtCore.QRect(140, 200, 101, 31))
@@ -282,6 +283,7 @@ class Ui_MainWindow(object):
         self.p37.raise_()
         self.p36.raise_()
         MainWindow.setCentralWidget(self.centralwidget)
+
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 21))
         self.menubar.setObjectName("menubar")
@@ -291,6 +293,8 @@ class Ui_MainWindow(object):
         self.menuBackground.setObjectName("menuBackground")
         self.menuTypescreen = QtWidgets.QMenu(self.menuSettings)
         self.menuTypescreen.setObjectName("menuTypescreen")
+        self.menuScreenResolution = QtWidgets.QMenu(self.menuSettings)
+        self.menuScreenResolution.setObjectName("menuScreenResolution")
         MainWindow.setMenuBar(self.menubar)
         self.actionExit = QtWidgets.QAction(MainWindow)
         self.actionExit.setObjectName("actionExit")
@@ -308,15 +312,21 @@ class Ui_MainWindow(object):
         self.actionNormal.setObjectName("actionNormal")
         self.actionBold = QtWidgets.QAction(MainWindow)
         self.actionBold.setObjectName("actionBold")
+        self.action1920x1080 = QtWidgets.QAction(MainWindow)
+        self.action1920x1080.setObjectName("action1920x1080")
+        self.action800x600 = QtWidgets.QAction(MainWindow)
+        self.action800x600.setObjectName("action800x600")
         self.menuBackground.addAction(self.actionDarkside)
         self.menuBackground.addAction(self.actionWhiteside)
         self.menuBackground.addAction(self.actionColorful_side)
         self.menuBackground.addAction(self.actionYour_side)
         self.menuTypescreen.addAction(self.actionNormal)
         self.menuTypescreen.addAction(self.actionBold)
+        self.menuScreenResolution.addAction(self.action1920x1080)
+        self.menuScreenResolution.addAction(self.action800x600)
         self.menuSettings.addSeparator()
         self.menuSettings.addAction(self.menuBackground.menuAction())
-        self.menuSettings.addAction(self.actionScreen_resolution)
+        self.menuSettings.addAction(self.menuScreenResolution.menuAction())
         self.menuSettings.addAction(self.menuTypescreen.menuAction())
         self.menuSettings.addAction(self.actionExit)
         self.menubar.addAction(self.menuSettings.menuAction())
@@ -324,10 +334,13 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+        self.add_functions()
+
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Diary"))
         self.Month_year.setText(_translate("MainWindow", "Month and year"))
+        self.Month_year.adjustSize() # Подогнать размера объекта под текущий монитор
         self.p2.setText(_translate("MainWindow", "PushButton"))
         self.p3.setText(_translate("MainWindow", "PushButton"))
         self.p4.setText(_translate("MainWindow", "PushButton"))
@@ -388,7 +401,160 @@ class Ui_MainWindow(object):
         self.actionYour_side.setText(_translate("MainWindow", "Your side"))
         self.actionNormal.setText(_translate("MainWindow", "Normal"))
         self.actionBold.setText(_translate("MainWindow", "Bold"))
+        self.menuScreenResolution.setTitle(_translate("MainWindow", "Screen Resolution"))
+        self.action1920x1080.setText(_translate("MainWindow", "1920x1080"))
+        self.action800x600.setText(_translate("MainWindow", "800x600"))
 
+    def add_functions(self):
+        self.set_month_and_date()
+        self.set_dates()
+
+        self.p1.clicked.connect(lambda: self.openWindow("1"))
+        self.p2.clicked.connect(lambda: self.openWindow("2"))
+        self.p3.clicked.connect(lambda: self.openWindow("3"))
+        self.p4.clicked.connect(lambda: self.openWindow("4"))
+        self.p5.clicked.connect(lambda: self.openWindow("5"))
+        self.p6.clicked.connect(lambda: self.openWindow("6"))
+        self.p7.clicked.connect(lambda: self.openWindow("7"))
+        self.p8.clicked.connect(lambda: self.openWindow("8"))
+        self.p9.clicked.connect(lambda: self.openWindow("9"))
+        self.p10.clicked.connect(lambda: self.openWindow("10"))
+        self.p11.clicked.connect(lambda: self.openWindow("11"))
+        self.p12.clicked.connect(lambda: self.openWindow("12"))
+        self.p13.clicked.connect(lambda: self.openWindow("13"))
+        self.p14.clicked.connect(lambda: self.openWindow("14"))
+        self.p15.clicked.connect(lambda: self.openWindow("15"))
+        self.p16.clicked.connect(lambda: self.openWindow("16"))
+        self.p17.clicked.connect(lambda: self.openWindow("17"))
+        self.p18.clicked.connect(lambda: self.openWindow("18"))
+        self.p19.clicked.connect(lambda: self.openWindow("19"))
+        self.p20.clicked.connect(lambda: self.openWindow("20"))
+        self.p21.clicked.connect(lambda: self.openWindow("21"))
+        self.p22.clicked.connect(lambda: self.openWindow("22"))
+        self.p23.clicked.connect(lambda: self.openWindow("23"))
+        self.p24.clicked.connect(lambda: self.openWindow("24"))
+        self.p25.clicked.connect(lambda: self.openWindow("25"))
+        self.p26.clicked.connect(lambda: self.openWindow("26"))
+        self.p27.clicked.connect(lambda: self.openWindow("27"))
+        self.p28.clicked.connect(lambda: self.openWindow("28"))
+        self.p29.clicked.connect(lambda: self.openWindow("29"))
+        self.p30.clicked.connect(lambda: self.openWindow("30"))
+        self.p31.clicked.connect(lambda: self.openWindow("31"))
+        self.p32.clicked.connect(lambda: self.openWindow("32"))
+        self.p33.clicked.connect(lambda: self.openWindow("33"))
+        self.p34.clicked.connect(lambda: self.openWindow("34"))
+        self.p35.clicked.connect(lambda: self.openWindow("35"))
+        self.p36.clicked.connect(lambda: self.openWindow("36"))
+        self.p37.clicked.connect(lambda: self.openWindow("37"))
+        self.p38.clicked.connect(lambda: self.openWindow("38"))
+        self.p39.clicked.connect(lambda: self.openWindow("39"))
+        self.p40.clicked.connect(lambda: self.openWindow("40"))
+        self.p41.clicked.connect(lambda: self.openWindow("41"))
+        self.p42.clicked.connect(lambda: self.openWindow("42"))
+
+        self.actionDarkside.triggered.connect(lambda: self.change_background(self.actionDarkside.text()))
+        self.actionWhiteside.triggered.connect(lambda: self.change_background(self.actionWhiteside.text()))
+        self.actionColorful_side.triggered.connect(lambda: self.change_background(self.actionColorful_side.text()))
+        self.actionYour_side.triggered.connect(lambda: self.change_background(self.actionYour_side.text()))
+
+        self.actionBold.triggered.connect(lambda: self.change_font(self.actionBold.text()))
+        self.actionNormal.triggered.connect(lambda: self.change_font(self.actionNormal.text()))
+
+        self.actionExit.triggered.connect(lambda: self.exit_app())
+
+        self.action1920x1080.triggered.connect(lambda: self.change_resolution(self.action1920x1080.text()))
+        self.action800x600.triggered.connect(lambda: self.change_resolution(self.action800x600.text()))
+
+    def openWindow(self, opened_day):
+        current_datetime = datetime.now()
+        currentMonth = datetime.now().month
+        currentYear = current_datetime.strftime("%Y")
+        date = currentYear + '-' + str(currentMonth) + '-' + opened_day
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_SecondWindow()
+        self.ui.setupUi(self.window, date)
+        self.window.show()
+    def change_resolution(self, resolution):
+        if resolution == "1920x1080":
+            MainWindow.resize(1920, 1080)
+        elif resolution == "800x600":
+            MainWindow.resize(800, 600)
+    def change_background(self, background):
+        if background == "Darkside":
+            self.label.setPixmap(QtGui.QPixmap())
+            self.label.setStyleSheet("background-color: rgb(0, 0, 0);")
+            self.Month_year.setStyleSheet("color: rgb(255, 255, 255)");
+        elif background == "White side":
+            self.label.setPixmap(QtGui.QPixmap())
+            self.label.setStyleSheet("background-color: rgb(255, 255, 255);")
+            self.Month_year.setStyleSheet("color: rgb(0, 0, 0)");
+        elif background == "Colorful side":
+            self.label.setPixmap(QtGui.QPixmap("D:/Загрузки/background_of_diary.jpg"))
+            self.Month_year.setStyleSheet("color: rgb(0, 0, 0)");
+        elif background == "Your side":
+            new_background = QFileDialog.getOpenFileName()[0]
+            self.label.setPixmap(QtGui.QPixmap(new_background))
+            self.Month_year.setStyleSheet("color: rgb(255, 255, 255)");
+    def change_font(self, font):
+        if font == "Bold":
+            self.Month_year.setStyleSheet("font-weight: bold");
+            self.Monday.setStyleSheet("font-weight: bold");
+            self.Tuesday.setStyleSheet("font-weight: bold");
+            self.Wednesday.setStyleSheet("font-weight: bold");
+            self.Thursday.setStyleSheet("font-weight: bold");
+            self.Friday.setStyleSheet("font-weight: bold");
+            self.Saturday.setStyleSheet("font-weight: bold");
+            self.Sunday.setStyleSheet("font-weight: bold");
+        elif font == "Normal":
+            self.Month_year.setStyleSheet("font-weight: normal");
+            self.Monday.setStyleSheet("font-weight: normal");
+            self.Tuesday.setStyleSheet("font-weight: normal");
+            self.Wednesday.setStyleSheet("font-weight: normal");
+            self.Thursday.setStyleSheet("font-weight: normal");
+            self.Friday.setStyleSheet("font-weight: normal");
+            self.Saturday.setStyleSheet("font-weight: normal");
+            self.Sunday.setStyleSheet("font-weight: normal");
+    def exit_app(self):
+        sys.exit()
+
+    def set_month_and_date(self):
+        current_datetime = datetime.now()
+        currentMonth = current_datetime.strftime("%B")
+        currentYear = current_datetime.strftime("%Y")
+        self.Month_year.setText(currentMonth + ' ' + currentYear)
+
+    def set_dates(self):
+        self.p1.setText("1")
+        self.p2.setText("2")
+        self.p3.setText("3")
+        self.p4.setText("4")
+        self.p5.setText("5")
+        self.p6.setText("6")
+        self.p7.setText("7")
+        self.p8.setText("8")
+        self.p9.setText("9")
+        self.p10.setText("10")
+        self.p11.setText("11")
+        self.p12.setText("12")
+        self.p13.setText("13")
+        self.p14.setText("14")
+        self.p15.setText("15")
+        self.p16.setText("16")
+        self.p17.setText("17")
+        self.p18.setText("18")
+        self.p19.setText("19")
+        self.p20.setText("20")
+        self.p21.setText("21")
+        self.p22.setText("22")
+        self.p23.setText("23")
+        self.p24.setText("24")
+        self.p25.setText("25")
+        self.p26.setText("26")
+        self.p27.setText("27")
+        self.p28.setText("28")
+        self.p29.setText("29")
+        self.p30.setText("30")
+        self.p31.setText("31")
 
 if __name__ == "__main__":
     import sys
