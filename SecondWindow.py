@@ -25,7 +25,8 @@ class Ui_SecondWindow(object):
         self.Backgrounddd = QtWidgets.QLabel(self.centralwidget)
         self.Backgrounddd.setGeometry(QtCore.QRect(0, 0, 400, 600))
         self.Backgrounddd.setText("")
-        self.Backgrounddd.setPixmap(QtGui.QPixmap("../../../Downloads/background_of_diary.jpg"))
+        self.Backgrounddd.setPixmap(QtGui.QPixmap("D:/Загрузки/background_of_diary.jpg"))
+
         self.Backgrounddd.setObjectName("Backgrounddd")
         self.Backgrounddd.raise_()
         self.listWidget.raise_()
@@ -56,23 +57,30 @@ class Ui_SecondWindow(object):
 
     def add_task(self, new_task, date):
         '''Добавляет задачу в базу данных.'''
-        db = sqlite3.connect("data.db")
-        cursor = db.cursor()
+        if new_task != "":
+            db = sqlite3.connect("data.db")
+            cursor = db.cursor()
 
-        task_time_qt = self.timeEdit.time()
-        task_time = task_time_qt.toString("hh:mm")
+            cursor.execute("CREATE TABLE IF NOT EXISTS Tasks (id INTEGER Primary key, task TEXT NOT NULL, completed INTEGER, date TEXT)")
+            db.commit()
 
-        if task_time != "00:00":
-            new_task = new_task + ' - ' + task_time
+            task_time_qt = self.timeEdit.time()
+            task_time = task_time_qt.toString("hh:mm")
 
-        query = "INSERT INTO Tasks(task, completed, date) VALUES (?,?,?)"
-        row = (new_task, 0, date,)
+            if task_time != "00:00":
+                new_task = new_task + ' - ' + task_time
 
-        cursor.execute(query,row)
-        db.commit()
+            cursor.execute("SELECT COALESCE(MAX(id)+1, 1) from Tasks")
+            ID = cursor.fetchone()[0]
 
-        self.save_changes(date)
-        self.update_tasks(date)
+            query = "INSERT INTO Tasks(id, task, completed, date) VALUES (?,?,?,?)"
+            row = (ID, new_task, 0, date,)
+
+            cursor.execute(query, row)
+            db.commit()
+
+            self.save_changes(date)
+            self.update_tasks(date)
 
     def update_tasks(self, date):
         '''Обновляет список с задачами из базы данных.'''
