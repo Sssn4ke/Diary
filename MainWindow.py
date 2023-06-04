@@ -1,6 +1,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QMenuBar, QMenu, QFileDialog
+from PyQt5.QtWidgets import QMenuBar, QMenu, QFileDialog, QPushButton
 from datetime import datetime
+from calendar import monthrange
 from SecondWindow import Ui_SecondWindow
 
 class Ui_MainWindow(object):
@@ -397,48 +398,48 @@ class Ui_MainWindow(object):
         self.set_month_and_date()
         self.set_dates()
 
-        self.p1.clicked.connect(lambda: self.openWindow("1"))
-        self.p2.clicked.connect(lambda: self.openWindow("2"))
-        self.p3.clicked.connect(lambda: self.openWindow("3"))
-        self.p4.clicked.connect(lambda: self.openWindow("4"))
-        self.p5.clicked.connect(lambda: self.openWindow("5"))
-        self.p6.clicked.connect(lambda: self.openWindow("6"))
-        self.p7.clicked.connect(lambda: self.openWindow("7"))
-        self.p8.clicked.connect(lambda: self.openWindow("8"))
-        self.p9.clicked.connect(lambda: self.openWindow("9"))
-        self.p10.clicked.connect(lambda: self.openWindow("10"))
-        self.p11.clicked.connect(lambda: self.openWindow("11"))
-        self.p12.clicked.connect(lambda: self.openWindow("12"))
-        self.p13.clicked.connect(lambda: self.openWindow("13"))
-        self.p14.clicked.connect(lambda: self.openWindow("14"))
-        self.p15.clicked.connect(lambda: self.openWindow("15"))
-        self.p16.clicked.connect(lambda: self.openWindow("16"))
-        self.p17.clicked.connect(lambda: self.openWindow("17"))
-        self.p18.clicked.connect(lambda: self.openWindow("18"))
-        self.p19.clicked.connect(lambda: self.openWindow("19"))
-        self.p20.clicked.connect(lambda: self.openWindow("20"))
-        self.p21.clicked.connect(lambda: self.openWindow("21"))
-        self.p22.clicked.connect(lambda: self.openWindow("22"))
-        self.p23.clicked.connect(lambda: self.openWindow("23"))
-        self.p24.clicked.connect(lambda: self.openWindow("24"))
-        self.p25.clicked.connect(lambda: self.openWindow("25"))
-        self.p26.clicked.connect(lambda: self.openWindow("26"))
-        self.p27.clicked.connect(lambda: self.openWindow("27"))
-        self.p28.clicked.connect(lambda: self.openWindow("28"))
-        self.p29.clicked.connect(lambda: self.openWindow("29"))
-        self.p30.clicked.connect(lambda: self.openWindow("30"))
-        self.p31.clicked.connect(lambda: self.openWindow("31"))
-        self.p32.clicked.connect(lambda: self.openWindow("32"))
-        self.p33.clicked.connect(lambda: self.openWindow("33"))
-        self.p34.clicked.connect(lambda: self.openWindow("34"))
-        self.p35.clicked.connect(lambda: self.openWindow("35"))
-        self.p36.clicked.connect(lambda: self.openWindow("36"))
-        self.p37.clicked.connect(lambda: self.openWindow("37"))
-        self.p38.clicked.connect(lambda: self.openWindow("38"))
-        self.p39.clicked.connect(lambda: self.openWindow("39"))
-        self.p40.clicked.connect(lambda: self.openWindow("40"))
-        self.p41.clicked.connect(lambda: self.openWindow("41"))
-        self.p42.clicked.connect(lambda: self.openWindow("42"))
+        self.p1.clicked.connect(lambda: self.openWindow(self.p1.text()))
+        self.p2.clicked.connect(lambda: self.openWindow(self.p2.text()))
+        self.p3.clicked.connect(lambda: self.openWindow(self.p3.text()))
+        self.p4.clicked.connect(lambda: self.openWindow(self.p4.text()))
+        self.p5.clicked.connect(lambda: self.openWindow(self.p5.text()))
+        self.p6.clicked.connect(lambda: self.openWindow(self.p6.text()))
+        self.p7.clicked.connect(lambda: self.openWindow(self.p7.text()))
+        self.p8.clicked.connect(lambda: self.openWindow(self.p8.text()))
+        self.p9.clicked.connect(lambda: self.openWindow(self.p9.text()))
+        self.p10.clicked.connect(lambda: self.openWindow(self.p10.text()))
+        self.p11.clicked.connect(lambda: self.openWindow(self.p11.text()))
+        self.p12.clicked.connect(lambda: self.openWindow(self.p12.text()))
+        self.p13.clicked.connect(lambda: self.openWindow(self.p13.text()))
+        self.p14.clicked.connect(lambda: self.openWindow(self.p14.text()))
+        self.p15.clicked.connect(lambda: self.openWindow(self.p15.text()))
+        self.p16.clicked.connect(lambda: self.openWindow(self.p16.text()))
+        self.p17.clicked.connect(lambda: self.openWindow(self.p17.text()))
+        self.p18.clicked.connect(lambda: self.openWindow(self.p18.text()))
+        self.p19.clicked.connect(lambda: self.openWindow(self.p19.text()))
+        self.p20.clicked.connect(lambda: self.openWindow(self.p20.text()))
+        self.p21.clicked.connect(lambda: self.openWindow(self.p21.text()))
+        self.p22.clicked.connect(lambda: self.openWindow(self.p22.text()))
+        self.p23.clicked.connect(lambda: self.openWindow(self.p23.text()))
+        self.p24.clicked.connect(lambda: self.openWindow(self.p24.text()))
+        self.p25.clicked.connect(lambda: self.openWindow(self.p25.text()))
+        self.p26.clicked.connect(lambda: self.openWindow(self.p26.text()))
+        self.p27.clicked.connect(lambda: self.openWindow(self.p27.text()))
+        self.p28.clicked.connect(lambda: self.openWindow(self.p28.text()))
+        self.p29.clicked.connect(lambda: self.openWindow(self.p29.text()))
+        self.p30.clicked.connect(lambda: self.openWindow(self.p30.text()))
+        self.p31.clicked.connect(lambda: self.openWindow(self.p31.text()))
+        self.p32.clicked.connect(lambda: self.openWindow(self.p32.text()))
+        self.p33.clicked.connect(lambda: self.openWindow(self.p33.text()))
+        self.p34.clicked.connect(lambda: self.openWindow(self.p34.text()))
+        self.p35.clicked.connect(lambda: self.openWindow(self.p35.text()))
+        self.p36.clicked.connect(lambda: self.openWindow(self.p36.text()))
+        self.p37.clicked.connect(lambda: self.openWindow(self.p37.text()))
+        self.p38.clicked.connect(lambda: self.openWindow(self.p38.text()))
+        self.p39.clicked.connect(lambda: self.openWindow(self.p39.text()))
+        self.p40.clicked.connect(lambda: self.openWindow(self.p40.text()))
+        self.p41.clicked.connect(lambda: self.openWindow(self.p41.text()))
+        self.p42.clicked.connect(lambda: self.openWindow(self.p42.text()))
 
         self.actionDarkside.triggered.connect(lambda: self.change_background(self.actionDarkside.text()))
         self.actionWhiteside.triggered.connect(lambda: self.change_background(self.actionWhiteside.text()))
@@ -452,9 +453,8 @@ class Ui_MainWindow(object):
 
     def openWindow(self, opened_day):
         '''Открывает окно SecondWindow.py при нажатии на кнопку в календаре.'''
-        current_datetime = datetime.now()
         currentMonth = datetime.now().month
-        currentYear = current_datetime.strftime("%Y")
+        currentYear = datetime.now().strftime("%Y")
         date = currentYear + '-' + str(currentMonth) + '-' + opened_day
         self.window = QtWidgets.QMainWindow()
         self.ui = Ui_SecondWindow()
@@ -516,44 +516,21 @@ class Ui_MainWindow(object):
 
     def set_month_and_date(self):
         '''Устанавливает текущие год и месяц.'''
-        current_datetime = datetime.now()
-        currentMonth = current_datetime.strftime("%B")
-        currentYear = current_datetime.strftime("%Y")
+        currentMonth = datetime.now().strftime("%B")
+        currentYear = datetime.now().strftime("%Y")
         self.Month_year.setText(currentMonth + ' ' + currentYear)
 
-    def set_dates(self):
+    def set_dates(self, currentMonth = datetime.now().month, currentYear = datetime.now().year):
         '''Устанавливает даты на кнопки в календаре.'''
-        self.p1.setText("1")
-        self.p2.setText("2")
-        self.p3.setText("3")
-        self.p4.setText("4")
-        self.p5.setText("5")
-        self.p6.setText("6")
-        self.p7.setText("7")
-        self.p8.setText("8")
-        self.p9.setText("9")
-        self.p10.setText("10")
-        self.p11.setText("11")
-        self.p12.setText("12")
-        self.p13.setText("13")
-        self.p14.setText("14")
-        self.p15.setText("15")
-        self.p16.setText("16")
-        self.p17.setText("17")
-        self.p18.setText("18")
-        self.p19.setText("19")
-        self.p20.setText("20")
-        self.p21.setText("21")
-        self.p22.setText("22")
-        self.p23.setText("23")
-        self.p24.setText("24")
-        self.p25.setText("25")
-        self.p26.setText("26")
-        self.p27.setText("27")
-        self.p28.setText("28")
-        self.p29.setText("29")
-        self.p30.setText("30")
-        self.p31.setText("31")
+        mrange = monthrange(currentYear, currentMonth)
+
+        for i in range(1, mrange[1] + 1):
+            eval("self.p{}.setText(\"{}\")".format(i + mrange[0], str(i)))
+        for i in range(1, mrange[0] + 1):
+            eval("self.p{}.setVisible(False)".format(i))
+        for i in range(mrange[0] + mrange[1] + 1, 43):
+            eval("self.p{}.setVisible(False)".format(i))
+
 
 if __name__ == "__main__":
     import sys
