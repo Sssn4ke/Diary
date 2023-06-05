@@ -1,4 +1,4 @@
-
+from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMenuBar, QMenu, QFileDialog, QPushButton
 from datetime import datetime
 from calendar import monthrange
@@ -537,13 +537,92 @@ class Ui_MainWindow(object):
 
         self.actionExit.triggered.connect(lambda: self.exit_app())
 
-   if __name__ == "__main__":
-import sys
-app = QtWidgets.QApplication(sys.argv)
-MainWindow = QtWidgets.QMainWindow()
-ui = Ui_MainWindow()
-ui.setupUi(MainWindow)
-MainWindow.show()
-sys.exit(app.exec_())
-connect(lambda: self.exit_app())
-все..
+    def openWindow(self, opened_day):
+        '''Открывает окно SecondWindow.py при нажатии на кнопку в календаре.'''
+        currentMonth = datetime.now().month
+        currentYear = datetime.now().strftime("%Y")
+        date = currentYear + '-' + str(currentMonth) + '-' + opened_day
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_SecondWindow()
+        self.ui.setupUi(self.window, date)
+        self.window.show()
+
+    def change_background(self, background):
+        '''Меняет задний фон приложения.'''
+        if background == "Darkside":
+            self.label.setPixmap(QtGui.QPixmap())
+            self.label.setStyleSheet("background-color: rgb(0, 0, 0);")
+            self.Month_year.setStyleSheet("color: rgb(255, 255, 255)");
+        elif background == "White side":
+            self.label.setPixmap(QtGui.QPixmap())
+            self.label.setStyleSheet("background-color: rgb(255, 255, 255);")
+            self.Month_year.setStyleSheet("color: rgb(0, 0, 0)");
+        elif background == "Colorful side":
+            self.label.setPixmap(QtGui.QPixmap("D:/Загрузки/background_of_diary.jpg"))
+            self.Month_year.setStyleSheet("color: rgb(0, 0, 0)");
+        elif background == "Your side":
+            new_background = QFileDialog.getOpenFileName()[0]
+            self.label.setPixmap(QtGui.QPixmap(new_background))
+            self.Month_year.setStyleSheet("color: rgb(255, 255, 255)");
+
+    def change_font(self, font):
+        '''Меняет шрифт в приложении.'''
+        if font == "Bold":
+            if self.get_backgroud_color() == "#000000":
+                self.Month_year.setStyleSheet("font-weight: bold; color: rgb(255, 255, 255)");
+            else:
+                self.Month_year.setStyleSheet("font-weight: bold; color: rgb(0, 0, 0)");
+            self.Monday.setStyleSheet("font-weight: bold");
+            self.Tuesday.setStyleSheet("font-weight: bold");
+            self.Wednesday.setStyleSheet("font-weight: bold");
+            self.Thursday.setStyleSheet("font-weight: bold");
+            self.Friday.setStyleSheet("font-weight: bold");
+            self.Saturday.setStyleSheet("font-weight: bold");
+            self.Sunday.setStyleSheet("font-weight: bold");
+        elif font == "Normal":
+            if self.get_backgroud_color() == "#000000":
+                self.Month_year.setStyleSheet("font-weight: normal; color: rgb(255, 255, 255)");
+            else:
+                self.Month_year.setStyleSheet("font-weight: normal; color: rgb(0, 0, 0)");
+            self.Monday.setStyleSheet("font-weight: normal");
+            self.Tuesday.setStyleSheet("font-weight: normal");
+            self.Wednesday.setStyleSheet("font-weight: normal");
+            self.Thursday.setStyleSheet("font-weight: normal");
+            self.Friday.setStyleSheet("font-weight: normal");
+            self.Saturday.setStyleSheet("font-weight: normal");
+            self.Sunday.setStyleSheet("font-weight: normal");
+
+    def get_backgroud_color(self):
+        '''Возвращает цвет заднего фона.'''
+        return self.label.palette().window().color().name()
+
+    def exit_app(self):
+        '''Функция для выхода из приложения путем нажатия кнопки.'''
+        sys.exit()
+
+    def set_month_and_date(self, currentMonth = datetime.now().strftime("%B"), currentYear = datetime.now().year):
+        '''Устанавливает текущие год и месяц.'''
+        currentMonth = datetime.now().strftime("%B")
+        currentYear = datetime.now().strftime("%Y")
+        self.Month_year.setText(currentMonth + ' ' + currentYear)
+
+    def set_dates(self, currentMonth = datetime.now().month, currentYear = datetime.now().year):
+        '''Устанавливает даты на кнопки в календаре.'''
+        mrange = monthrange(currentYear, currentMonth)
+
+        for i in range(1, mrange[1] + 1):
+            eval("self.p{}.setText(\"{}\")".format(i + mrange[0], str(i)))
+        for i in range(1, mrange[0] + 1):
+            eval("self.p{}.setVisible(False)".format(i))
+        for i in range(mrange[0] + mrange[1] + 1, 43):
+            eval("self.p{}.setVisible(False)".format(i))
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    MainWindow = QtWidgets.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
+    sys.exit(app.exec_())
