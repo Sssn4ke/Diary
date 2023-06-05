@@ -85,11 +85,15 @@ class Ui_SecondWindow(object):
 
     def add_functions(self, today_date):
         '''Добавляет все необходимые функции для корректной работы приложения.'''
-        self.update_tasks(today_date)
+        self.update_window(today_date)
 
         self.button_for_adding.clicked.connect(lambda: self.add_task(self.textEdit.toPlainText(), today_date))
         self.button_for_save.clicked.connect(lambda: self.save_changes(today_date))
         self.button_for_removing.clicked.connect(lambda: self.remove_task(today_date))
+
+    def update_window(self, date):
+        self.update_tasks(date)
+        self.update_progress_bar(date)
 
     def add_task(self, new_task, date):
         '''Добавляет задачу в базу данных.'''
@@ -115,7 +119,7 @@ class Ui_SecondWindow(object):
             cursor.execute(query, row)
             db.commit()
 
-            self.update_tasks(date)
+            self.update_window(date)
             self.textEdit.clear()
 
     def remove_task(self, date):
@@ -134,7 +138,7 @@ class Ui_SecondWindow(object):
         cursor.execute("DELETE from Tasks WHERE id = ?", (result_id[0], ))
         db.commit()
 
-        self.update_tasks(date)
+        self.update_window(date)
 
     def update_tasks(self, date):
         '''Обновляет список с задачами из базы данных.'''
@@ -175,6 +179,22 @@ class Ui_SecondWindow(object):
             cursor.execute(query, row)
 
         db.commit()
+
+        self.update_window(date)
+
+    def update_progress_bar(self, date):
+        db = sqlite3.connect("data.db")
+        cursor = db.cursor()
+
+        query1 = "SELECT count() FROM Tasks WHERE date = ?"
+        row = (date, )
+        num_of_tasks = cursor.execute(query1, row).fetchall()[0][0]
+
+        query2 = "SELECT count() FROM Tasks WHERE completed = 1 and date = ?"
+        num_of_completed_tasks = cursor.execute(query2, row).fetchall()[0][0]
+
+        percentage = num_of_completed_tasks / num_of_tasks * 100
+        self.progressBar.setValue(percentage)
 
 if __name__ == "__main__":
     import sys
