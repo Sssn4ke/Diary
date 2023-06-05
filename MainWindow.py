@@ -1,6 +1,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QMenuBar, QMenu, QFileDialog
+from PyQt5.QtWidgets import QMenuBar, QMenu, QFileDialog, QPushButton
 from datetime import datetime
+from calendar import monthrange
 from SecondWindow import Ui_SecondWindow
 
 class Ui_MainWindow(object):
@@ -1227,44 +1228,21 @@ connect(lambda: self.exit_app())
 
     def set_month_and_date(self):
         '''Устанавливает текущие год и месяц.'''
-        current_datetime = datetime.now()
-        currentMonth = current_datetime.strftime("%B")
-        currentYear = current_datetime.strftime("%Y")
+        currentMonth = datetime.now().strftime("%B")
+        currentYear = datetime.now().strftime("%Y")
         self.Month_year.setText(currentMonth + ' ' + currentYear)
 
-    def set_dates(self):
+    def set_dates(self, currentMonth = datetime.now().month, currentYear = datetime.now().year):
         '''Устанавливает даты на кнопки в календаре.'''
-        self.p1.setText("1")
-        self.p2.setText("2")
-        self.p3.setText("3")
-        self.p4.setText("4")
-        self.p5.setText("5")
-        self.p6.setText("6")
-        self.p7.setText("7")
-        self.p8.setText("8")
-        self.p9.setText("9")
-        self.p10.setText("10")
-        self.p11.setText("11")
-        self.p12.setText("12")
-        self.p13.setText("13")
-        self.p14.setText("14")
-        self.p15.setText("15")
-        self.p16.setText("16")
-        self.p17.setText("17")
-        self.p18.setText("18")
-        self.p19.setText("19")
-        self.p20.setText("20")
-        self.p21.setText("21")
-        self.p22.setText("22")
-        self.p23.setText("23")
-        self.p24.setText("24")
-        self.p25.setText("25")
-        self.p26.setText("26")
-        self.p27.setText("27")
-        self.p28.setText("28")
-        self.p29.setText("29")
-        self.p30.setText("30")
-        self.p31.setText("31")
+        mrange = monthrange(currentYear, currentMonth)
+
+        for i in range(1, mrange[1] + 1):
+            eval("self.p{}.setText(\"{}\")".format(i + mrange[0], str(i)))
+        for i in range(1, mrange[0] + 1):
+            eval("self.p{}.setVisible(False)".format(i))
+        for i in range(mrange[0] + mrange[1] + 1, 43):
+            eval("self.p{}.setVisible(False)".format(i))
+
 
 if __name__ == "__main__":
     import sys
