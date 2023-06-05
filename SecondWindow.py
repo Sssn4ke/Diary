@@ -16,7 +16,7 @@ class Ui_SecondWindow(object):
         self.textEdit.setGeometry(QtCore.QRect(70, 60, 160, 130))
         self.textEdit.setObjectName("textEdit")
         self.listWidget = QtWidgets.QListWidget(self.centralwidget)
-        self.listWidget.setGeometry(QtCore.QRect(50, 210, 300, 285))
+        self.listWidget.setGeometry(QtCore.QRect(50, 210, 300, 260))
         self.listWidget.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
         self.listWidget.setObjectName("listWidget")
         self.button_for_adding = QtWidgets.QPushButton(self.centralwidget)
@@ -27,6 +27,8 @@ class Ui_SecondWindow(object):
         font.setBold(False)
         font.setWeight(50)
         self.button_for_adding.setFont(font)
+        self.button_for_adding.setStyleSheet("background-color: rgb(159, 165, 160);\n"
+                                             "border-radius: 20px;")
         self.button_for_adding.setObjectName("button_for_adding")
         self.button_for_save = QtWidgets.QPushButton(self.centralwidget)
         self.button_for_save.setGeometry(QtCore.QRect(60, 520, 110, 50))
@@ -34,6 +36,8 @@ class Ui_SecondWindow(object):
         font.setFamily("MS Sans Serif")
         font.setPointSize(14)
         self.button_for_save.setFont(font)
+        self.button_for_save.setStyleSheet("background-color: rgb(159, 165, 160);\n"
+                                           "border-radius: 20px;")
         self.button_for_save.setObjectName("button_for_save")
         self.button_for_removing = QtWidgets.QPushButton(self.centralwidget)
         self.button_for_removing.setGeometry(QtCore.QRect(230, 520, 110, 50))
@@ -41,12 +45,18 @@ class Ui_SecondWindow(object):
         font.setFamily("MS Sans Serif")
         font.setPointSize(14)
         self.button_for_removing.setFont(font)
+        self.button_for_removing.setStyleSheet("background-color: rgb(159, 165, 160);\n"
+                                        "border-radius: 20px;")
         self.button_for_removing.setObjectName("button_for_removing")
         self.Backgrounddd = QtWidgets.QLabel(self.centralwidget)
         self.Backgrounddd.setGeometry(QtCore.QRect(0, 0, 400, 600))
         self.Backgrounddd.setText("")
         self.Backgrounddd.setPixmap(QtGui.QPixmap("D:/Загрузки/background_of_diary.jpg"))
         self.Backgrounddd.setObjectName("Backgrounddd")
+        self.progressBar = QtWidgets.QProgressBar(self.centralwidget)
+        self.progressBar.setGeometry(QtCore.QRect(50, 470, 300, 30))
+        self.progressBar.setProperty("value", 24)
+        self.progressBar.setObjectName("progressBar")
         self.Backgrounddd.raise_()
         self.timeEdit.raise_()
         self.textEdit.raise_()
@@ -54,6 +64,7 @@ class Ui_SecondWindow(object):
         self.button_for_adding.raise_()
         self.button_for_save.raise_()
         self.button_for_removing.raise_()
+        self.progressBar.raise_()
         SecondWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(SecondWindow)
@@ -131,6 +142,9 @@ class Ui_SecondWindow(object):
 
         db = sqlite3.connect("data.db")
         cursor = db.cursor()
+
+        cursor.execute("CREATE TABLE IF NOT EXISTS Tasks (id INTEGER Primary key, task TEXT NOT NULL, completed INTEGER, date TEXT)")
+        db.commit()
 
         query = "SELECT task, completed FROM Tasks Where date = ?"
         row = (date, )
