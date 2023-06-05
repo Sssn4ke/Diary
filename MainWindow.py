@@ -617,17 +617,6 @@ class Ui_MainWindow(object):
         for i in range(mrange[0] + mrange[1] + 1, 43):
             eval("self.p{}.setVisible(False)".format(i))
 
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec_())
-connect(lambda: self.exit_app())
-
     def openWindow(self, opened_day):
         '''Открывает окно SecondWindow.py при нажатии на кнопку в календаре.'''
         current_datetime = datetime.now()
