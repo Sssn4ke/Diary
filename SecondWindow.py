@@ -46,7 +46,7 @@ class Ui_SecondWindow(object):
         font.setPointSize(14)
         self.button_for_removing.setFont(font)
         self.button_for_removing.setStyleSheet("background-color: rgb(159, 165, 160);\n"
-                                        "border-radius: 20px;")
+                                               "border-radius: 20px;")
         self.button_for_removing.setObjectName("button_for_removing")
         self.Backgrounddd = QtWidgets.QLabel(self.centralwidget)
         self.Backgrounddd.setGeometry(QtCore.QRect(0, 0, 400, 600))
@@ -193,7 +193,7 @@ class Ui_SecondWindow(object):
         query2 = "SELECT count() FROM Tasks WHERE completed = 1 and date = ?"
         num_of_completed_tasks = cursor.execute(query2, row).fetchall()[0][0]
 
-        percentage = num_of_completed_tasks / num_of_tasks * 100
+        percentage = num_of_completed_tasks / num_of_tasks * 100 if num_of_tasks != 0 else 0
         self.progressBar.setValue(percentage)
 
 if __name__ == "__main__":
