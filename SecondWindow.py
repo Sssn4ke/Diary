@@ -75,7 +75,7 @@ class Ui_SecondWindow(object):
     def retranslateUi(self, SecondWindow):
         '''Устанавливает текст и заголовки виджетов.'''
         _translate = QtCore.QCoreApplication.translate
-        SecondWindow.setWindowTitle(_translate("SecondWindow", "Write_there_a_datatime"))
+        SecondWindow.setWindowTitle(_translate("SecondWindow", "Task Manager"))
         __sortingEnabled = self.listWidget.isSortingEnabled()
         self.listWidget.setSortingEnabled(False)
         self.listWidget.setSortingEnabled(__sortingEnabled)
@@ -179,6 +179,13 @@ class Ui_SecondWindow(object):
             cursor.execute(query, row)
 
         db.commit()
+
+        messageBox = QMessageBox()
+        messageBox.setStyleSheet("min-width: 150px;");
+        messageBox.setText("Changes saved!")
+        messageBox.setWindowTitle("Notification")
+        messageBox.setStandardButtons(QMessageBox.Ok)
+        messageBox.exec()
 
         self.update_window(date)
 
