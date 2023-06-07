@@ -1,7 +1,9 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMenuBar, QMenu, QFileDialog, QPushButton
 from datetime import datetime
+import calendar
 from calendar import monthrange
+import sqlite3
 from SecondWindow import Ui_SecondWindow
 
 class Ui_MainWindow(object):
@@ -37,130 +39,130 @@ class Ui_MainWindow(object):
         self.label.setPixmap(QtGui.QPixmap("D:/Загрузки/background_of_diary.jpg"))
         self.label.setObjectName("label")
         self.p2 = QtWidgets.QPushButton(self.centralwidget)
-        self.p2.setGeometry(QtCore.QRect(140, 200, 101, 31))
+        self.p2.setGeometry(QtCore.QRect(141, 200, 101, 31))
         self.p2.setObjectName("p2")
         self.p3 = QtWidgets.QPushButton(self.centralwidget)
-        self.p3.setGeometry(QtCore.QRect(240, 200, 101, 31))
+        self.p3.setGeometry(QtCore.QRect(241, 200, 101, 31))
         self.p3.setObjectName("p3")
         self.p4 = QtWidgets.QPushButton(self.centralwidget)
-        self.p4.setGeometry(QtCore.QRect(340, 200, 101, 31))
+        self.p4.setGeometry(QtCore.QRect(341, 200, 101, 31))
         self.p4.setObjectName("p4")
         self.p5 = QtWidgets.QPushButton(self.centralwidget)
-        self.p5.setGeometry(QtCore.QRect(440, 200, 101, 31))
+        self.p5.setGeometry(QtCore.QRect(441, 200, 101, 31))
         self.p5.setObjectName("p5")
         self.p1 = QtWidgets.QPushButton(self.centralwidget)
-        self.p1.setGeometry(QtCore.QRect(40, 200, 101, 31))
+        self.p1.setGeometry(QtCore.QRect(41, 200, 101, 31))
         self.p1.setObjectName("p1")
         self.p6 = QtWidgets.QPushButton(self.centralwidget)
-        self.p6.setGeometry(QtCore.QRect(540, 200, 101, 31))
+        self.p6.setGeometry(QtCore.QRect(541, 200, 101, 31))
         self.p6.setObjectName("p6")
         self.p7 = QtWidgets.QPushButton(self.centralwidget)
-        self.p7.setGeometry(QtCore.QRect(640, 200, 101, 31))
+        self.p7.setGeometry(QtCore.QRect(641, 200, 101, 31))
         self.p7.setObjectName("p7")
         self.p8 = QtWidgets.QPushButton(self.centralwidget)
-        self.p8.setGeometry(QtCore.QRect(40, 230, 101, 31))
+        self.p8.setGeometry(QtCore.QRect(41, 230, 101, 31))
         self.p8.setObjectName("p8")
         self.p9 = QtWidgets.QPushButton(self.centralwidget)
-        self.p9.setGeometry(QtCore.QRect(140, 230, 101, 31))
+        self.p9.setGeometry(QtCore.QRect(141, 230, 101, 31))
         self.p9.setObjectName("p9")
         self.p10 = QtWidgets.QPushButton(self.centralwidget)
-        self.p10.setGeometry(QtCore.QRect(240, 230, 101, 31))
+        self.p10.setGeometry(QtCore.QRect(241, 230, 101, 31))
         self.p10.setObjectName("p10")
         self.p11 = QtWidgets.QPushButton(self.centralwidget)
-        self.p11.setGeometry(QtCore.QRect(340, 230, 101, 31))
+        self.p11.setGeometry(QtCore.QRect(341, 230, 101, 31))
         self.p11.setObjectName("p11")
         self.p12 = QtWidgets.QPushButton(self.centralwidget)
-        self.p12.setGeometry(QtCore.QRect(440, 230, 101, 31))
+        self.p12.setGeometry(QtCore.QRect(441, 230, 101, 31))
         self.p12.setObjectName("p12")
         self.p13 = QtWidgets.QPushButton(self.centralwidget)
-        self.p13.setGeometry(QtCore.QRect(540, 230, 101, 31))
+        self.p13.setGeometry(QtCore.QRect(541, 230, 101, 31))
         self.p13.setObjectName("p13")
         self.p14 = QtWidgets.QPushButton(self.centralwidget)
-        self.p14.setGeometry(QtCore.QRect(640, 230, 101, 31))
+        self.p14.setGeometry(QtCore.QRect(641, 230, 101, 31))
         self.p14.setObjectName("p14")
         self.p21 = QtWidgets.QPushButton(self.centralwidget)
-        self.p21.setGeometry(QtCore.QRect(640, 260, 101, 31))
+        self.p21.setGeometry(QtCore.QRect(641, 260, 101, 31))
         self.p21.setObjectName("p21")
         self.p28 = QtWidgets.QPushButton(self.centralwidget)
-        self.p28.setGeometry(QtCore.QRect(640, 290, 101, 31))
+        self.p28.setGeometry(QtCore.QRect(641, 290, 101, 31))
         self.p28.setObjectName("p28")
         self.p35 = QtWidgets.QPushButton(self.centralwidget)
-        self.p35.setGeometry(QtCore.QRect(640, 320, 101, 31))
+        self.p35.setGeometry(QtCore.QRect(641, 320, 101, 31))
         self.p35.setObjectName("p35")
         self.p20 = QtWidgets.QPushButton(self.centralwidget)
-        self.p20.setGeometry(QtCore.QRect(540, 260, 101, 31))
+        self.p20.setGeometry(QtCore.QRect(541, 260, 101, 31))
         self.p20.setObjectName("p20")
         self.p27 = QtWidgets.QPushButton(self.centralwidget)
-        self.p27.setGeometry(QtCore.QRect(540, 290, 101, 31))
+        self.p27.setGeometry(QtCore.QRect(541, 290, 101, 31))
         self.p27.setObjectName("p27")
         self.p34 = QtWidgets.QPushButton(self.centralwidget)
-        self.p34.setGeometry(QtCore.QRect(540, 320, 101, 31))
+        self.p34.setGeometry(QtCore.QRect(541, 320, 101, 31))
         self.p34.setObjectName("p34")
         self.p19 = QtWidgets.QPushButton(self.centralwidget)
-        self.p19.setGeometry(QtCore.QRect(440, 260, 101, 31))
+        self.p19.setGeometry(QtCore.QRect(441, 260, 101, 31))
         self.p19.setObjectName("p19")
         self.p26 = QtWidgets.QPushButton(self.centralwidget)
-        self.p26.setGeometry(QtCore.QRect(440, 290, 101, 31))
+        self.p26.setGeometry(QtCore.QRect(441, 290, 101, 31))
         self.p26.setObjectName("p26")
         self.p33 = QtWidgets.QPushButton(self.centralwidget)
-        self.p33.setGeometry(QtCore.QRect(440, 320, 101, 31))
+        self.p33.setGeometry(QtCore.QRect(441, 320, 101, 31))
         self.p33.setObjectName("p33")
         self.p18 = QtWidgets.QPushButton(self.centralwidget)
-        self.p18.setGeometry(QtCore.QRect(340, 260, 101, 31))
+        self.p18.setGeometry(QtCore.QRect(341, 260, 101, 31))
         self.p18.setObjectName("p18")
         self.p25 = QtWidgets.QPushButton(self.centralwidget)
-        self.p25.setGeometry(QtCore.QRect(340, 290, 101, 31))
+        self.p25.setGeometry(QtCore.QRect(341, 290, 101, 31))
         self.p25.setObjectName("p25")
         self.p32 = QtWidgets.QPushButton(self.centralwidget)
-        self.p32.setGeometry(QtCore.QRect(340, 320, 101, 31))
+        self.p32.setGeometry(QtCore.QRect(341, 320, 101, 31))
         self.p32.setObjectName("p32")
         self.p17 = QtWidgets.QPushButton(self.centralwidget)
-        self.p17.setGeometry(QtCore.QRect(240, 260, 101, 31))
+        self.p17.setGeometry(QtCore.QRect(241, 260, 101, 31))
         self.p17.setObjectName("p17")
         self.p24 = QtWidgets.QPushButton(self.centralwidget)
-        self.p24.setGeometry(QtCore.QRect(240, 290, 101, 31))
+        self.p24.setGeometry(QtCore.QRect(241, 290, 101, 31))
         self.p24.setObjectName("p24")
         self.p31 = QtWidgets.QPushButton(self.centralwidget)
-        self.p31.setGeometry(QtCore.QRect(240, 320, 101, 31))
+        self.p31.setGeometry(QtCore.QRect(241, 320, 101, 31))
         self.p31.setObjectName("p31")
         self.p16 = QtWidgets.QPushButton(self.centralwidget)
-        self.p16.setGeometry(QtCore.QRect(140, 260, 101, 31))
+        self.p16.setGeometry(QtCore.QRect(141, 260, 101, 31))
         self.p16.setObjectName("p16")
         self.p23 = QtWidgets.QPushButton(self.centralwidget)
-        self.p23.setGeometry(QtCore.QRect(140, 290, 101, 31))
+        self.p23.setGeometry(QtCore.QRect(141, 290, 101, 31))
         self.p23.setObjectName("p23")
         self.p30 = QtWidgets.QPushButton(self.centralwidget)
-        self.p30.setGeometry(QtCore.QRect(140, 320, 101, 31))
+        self.p30.setGeometry(QtCore.QRect(141, 320, 101, 31))
         self.p30.setObjectName("p30")
         self.p22 = QtWidgets.QPushButton(self.centralwidget)
-        self.p22.setGeometry(QtCore.QRect(40, 290, 101, 31))
+        self.p22.setGeometry(QtCore.QRect(41, 290, 101, 31))
         self.p22.setObjectName("p22")
         self.p29 = QtWidgets.QPushButton(self.centralwidget)
-        self.p29.setGeometry(QtCore.QRect(40, 320, 101, 31))
+        self.p29.setGeometry(QtCore.QRect(41, 320, 101, 31))
         self.p29.setObjectName("p29")
         self.p15 = QtWidgets.QPushButton(self.centralwidget)
-        self.p15.setGeometry(QtCore.QRect(40, 260, 101, 31))
+        self.p15.setGeometry(QtCore.QRect(41, 260, 101, 31))
         self.p15.setObjectName("p15")
         self.p42 = QtWidgets.QPushButton(self.centralwidget)
-        self.p42.setGeometry(QtCore.QRect(640, 350, 101, 31))
+        self.p42.setGeometry(QtCore.QRect(641, 350, 101, 31))
         self.p42.setObjectName("p42")
         self.p41 = QtWidgets.QPushButton(self.centralwidget)
-        self.p41.setGeometry(QtCore.QRect(540, 350, 101, 31))
+        self.p41.setGeometry(QtCore.QRect(541, 350, 101, 31))
         self.p41.setObjectName("p41")
         self.p40 = QtWidgets.QPushButton(self.centralwidget)
-        self.p40.setGeometry(QtCore.QRect(440, 350, 101, 31))
+        self.p40.setGeometry(QtCore.QRect(441, 350, 101, 31))
         self.p40.setObjectName("p40")
         self.p39 = QtWidgets.QPushButton(self.centralwidget)
-        self.p39.setGeometry(QtCore.QRect(340, 350, 101, 31))
+        self.p39.setGeometry(QtCore.QRect(341, 350, 101, 31))
         self.p39.setObjectName("p39")
         self.p38 = QtWidgets.QPushButton(self.centralwidget)
-        self.p38.setGeometry(QtCore.QRect(240, 350, 101, 31))
+        self.p38.setGeometry(QtCore.QRect(241, 350, 101, 31))
         self.p38.setObjectName("p38")
         self.p37 = QtWidgets.QPushButton(self.centralwidget)
-        self.p37.setGeometry(QtCore.QRect(140, 350, 101, 31))
+        self.p37.setGeometry(QtCore.QRect(141, 350, 101, 31))
         self.p37.setObjectName("p37")
         self.p36 = QtWidgets.QPushButton(self.centralwidget)
-        self.p36.setGeometry(QtCore.QRect(40, 350, 101, 31))
+        self.p36.setGeometry(QtCore.QRect(41, 350, 101, 31))
         self.p36.setObjectName("p36")
         self.Monday = QtWidgets.QLabel(self.centralwidget)
         self.Monday.setGeometry(QtCore.QRect(40, 170, 101, 31))
@@ -317,30 +319,6 @@ class Ui_MainWindow(object):
         self.menuFile = QtWidgets.QMenu(self.menubar)
         self.menuFile.setObjectName("menuFile")
         MainWindow.setMenuBar(self.menubar)
-        self.actionJanuary = QtWidgets.QAction(MainWindow)
-        self.actionJanuary.setObjectName("actionJanuary")
-        self.actionFebruary = QtWidgets.QAction(MainWindow)
-        self.actionFebruary.setObjectName("actionFebruary")
-        self.actionMarch = QtWidgets.QAction(MainWindow)
-        self.actionMarch.setObjectName("actionMarch")
-        self.actionApril = QtWidgets.QAction(MainWindow)
-        self.actionApril.setObjectName("actionApril")
-        self.actionMay = QtWidgets.QAction(MainWindow)
-        self.actionMay.setObjectName("actionMay")
-        self.actionJune = QtWidgets.QAction(MainWindow)
-        self.actionJune.setObjectName("actionJune")
-        self.actionJuly = QtWidgets.QAction(MainWindow)
-        self.actionJuly.setObjectName("actionJuly")
-        self.actionAugust = QtWidgets.QAction(MainWindow)
-        self.actionAugust.setObjectName("actionAugust")
-        self.actionSeptember = QtWidgets.QAction(MainWindow)
-        self.actionSeptember.setObjectName("actionSeptember")
-        self.actionOctober = QtWidgets.QAction(MainWindow)
-        self.actionOctober.setObjectName("actionOctober")
-        self.actionNovember = QtWidgets.QAction(MainWindow)
-        self.actionNovember.setObjectName("actionNovember")
-        self.actionDecember = QtWidgets.QAction(MainWindow)
-        self.actionDecember.setObjectName("actionDecember")
         self.actionDarkside = QtWidgets.QAction(MainWindow)
         self.actionDarkside.setObjectName("actionDarkside")
         self.actionWhiteside = QtWidgets.QAction(MainWindow)
@@ -396,7 +374,6 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Diary"))
         self.Month_year.setText(_translate("MainWindow", "Month and year"))
-        self.Month_year.adjustSize() # Подогнать размера объекта под текущий монитор
         self.p2.setText(_translate("MainWindow", "PushButton"))
         self.p3.setText(_translate("MainWindow", "PushButton"))
         self.p4.setText(_translate("MainWindow", "PushButton"))
@@ -453,22 +430,10 @@ class Ui_MainWindow(object):
         self.menuTypescreen.setTitle(_translate("MainWindow", "Typescreen"))
         self.menuButton_Colour.setTitle(_translate("MainWindow", "Button Colour"))
         self.menuFile.setTitle(_translate("MainWindow", "File"))
-        self.actionJanuary.setText(_translate("MainWindow", "January"))
-        self.actionFebruary.setText(_translate("MainWindow", "February"))
-        self.actionMarch.setText(_translate("MainWindow", "March"))
-        self.actionApril.setText(_translate("MainWindow", "April"))
-        self.actionMay.setText(_translate("MainWindow", "May"))
-        self.actionJune.setText(_translate("MainWindow", "June"))
-        self.actionJuly.setText(_translate("MainWindow", "July"))
-        self.actionAugust.setText(_translate("MainWindow", "August"))
-        self.actionSeptember.setText(_translate("MainWindow", "September"))
-        self.actionOctober.setText(_translate("MainWindow", "October"))
-        self.actionNovember.setText(_translate("MainWindow", "November"))
-        self.actionDecember.setText(_translate("MainWindow", "December"))
-        self.actionDarkside.setText(_translate("MainWindow", "DarkSide"))
-        self.actionWhiteside.setText(_translate("MainWindow", "WhiteSide"))
-        self.actionColorful_side.setText(_translate("MainWindow", "ColorfulSide"))
-        self.actionYour_side.setText(_translate("MainWindow", "YourSide"))
+        self.actionDarkside.setText(_translate("MainWindow", "Darkside"))
+        self.actionWhiteside.setText(_translate("MainWindow", "Whiteside"))
+        self.actionColorful_side.setText(_translate("MainWindow", "Colorfulside"))
+        self.actionYour_side.setText(_translate("MainWindow", "Yourside"))
         self.actionNormal.setText(_translate("MainWindow", "Normal"))
         self.actionBold.setText(_translate("MainWindow", "Bold"))
         self.actionExit.setText(_translate("MainWindow", "Exit"))
@@ -483,6 +448,7 @@ class Ui_MainWindow(object):
         '''Добавляет все необходимые функции для корректной работы приложения.'''
         self.set_month_and_date()
         self.set_dates()
+        self.set_active()
 
         self.p1.clicked.connect(lambda: self.openWindow(self.p1.text()))
         self.p2.clicked.connect(lambda: self.openWindow(self.p2.text()))
@@ -527,6 +493,9 @@ class Ui_MainWindow(object):
         self.p41.clicked.connect(lambda: self.openWindow(self.p41.text()))
         self.p42.clicked.connect(lambda: self.openWindow(self.p42.text()))
 
+        self.Right_step.clicked.connect(lambda: self.update_window(1))
+        self.Left_step.clicked.connect(lambda: self.update_window(-1))
+
         self.actionDarkside.triggered.connect(lambda: self.change_background(self.actionDarkside.text()))
         self.actionWhiteside.triggered.connect(lambda: self.change_background(self.actionWhiteside.text()))
         self.actionColorful_side.triggered.connect(lambda: self.change_background(self.actionColorful_side.text()))
@@ -537,30 +506,55 @@ class Ui_MainWindow(object):
 
         self.actionExit.triggered.connect(lambda: self.exit_app())
 
+
     def openWindow(self, opened_day):
         '''Открывает окно SecondWindow.py при нажатии на кнопку в календаре.'''
-        currentMonth = datetime.now().month
-        currentYear = datetime.now().strftime("%Y")
-        date = currentYear + '-' + str(currentMonth) + '-' + opened_day
+        month_year = self.Month_year.text().split()
+        month_year[0] = month_year[0][0] + month_year[0][1] + month_year[0][2]
+        abbr_to_num = {name: num for num, name in enumerate(calendar.month_abbr) if num}
+        month_year[0] = abbr_to_num[month_year[0]]
+
+        date = month_year[1] + '-' + str(month_year[0]) + '-' + opened_day
         self.window = QtWidgets.QMainWindow()
         self.ui = Ui_SecondWindow()
         self.ui.setupUi(self.window, date)
         self.window.show()
+
+    def update_window(self, difference):
+        month_year = self.Month_year.text().split()
+        month_year[0] = month_year[0][0] + month_year[0][1] + month_year[0][2]
+        abbr_to_num = {name: num for num, name in enumerate(calendar.month_abbr) if num}
+        month_year[0] = abbr_to_num[month_year[0]]
+
+        if month_year[0] == 2 and difference == -1:
+            self.Left_step.setVisible(False)
+        if month_year[0] == 11 and difference == 1:
+            self.Right_step.setVisible(False)
+        if month_year[0] == 12:
+            self.Right_step.setVisible(True)
+        if month_year[0] == 1:
+            self.Left_step.setVisible(True)
+
+        month_year[0] += difference
+
+        self.set_month_and_date(calendar.month_name[month_year[0]], month_year[1])
+        self.set_dates(month_year[0], int(month_year[1]))
+        self.set_active(month_year[0], int(month_year[1]))
 
     def change_background(self, background):
         '''Меняет задний фон приложения.'''
         if background == "Darkside":
             self.label.setPixmap(QtGui.QPixmap())
             self.label.setStyleSheet("background-color: rgb(0, 0, 0);")
-            self.Month_year.setStyleSheet("color: rgb(255, 255, 255)");
-        elif background == "White side":
+            self.Month_year.setStyleSheet("color: rgb(255, 255, 255);")
+        elif background == "Whiteside":
             self.label.setPixmap(QtGui.QPixmap())
             self.label.setStyleSheet("background-color: rgb(255, 255, 255);")
             self.Month_year.setStyleSheet("color: rgb(0, 0, 0)");
-        elif background == "Colorful side":
+        elif background == "Colorfulside":
             self.label.setPixmap(QtGui.QPixmap("D:/Загрузки/background_of_diary.jpg"))
             self.Month_year.setStyleSheet("color: rgb(0, 0, 0)");
-        elif background == "Your side":
+        elif background == "Yourside":
             new_background = QFileDialog.getOpenFileName()[0]
             self.label.setPixmap(QtGui.QPixmap(new_background))
             self.Month_year.setStyleSheet("color: rgb(255, 255, 255)");
@@ -600,14 +594,15 @@ class Ui_MainWindow(object):
         '''Функция для выхода из приложения путем нажатия кнопки.'''
         sys.exit()
 
-    def set_month_and_date(self, currentMonth = datetime.now().strftime("%B"), currentYear = datetime.now().year):
+    def set_month_and_date(self, currentMonth = datetime.now().strftime("%B"), currentYear = datetime.now().strftime("%Y")):
         '''Устанавливает текущие год и месяц.'''
-        currentMonth = datetime.now().strftime("%B")
-        currentYear = datetime.now().strftime("%Y")
         self.Month_year.setText(currentMonth + ' ' + currentYear)
 
     def set_dates(self, currentMonth = datetime.now().month, currentYear = datetime.now().year):
         '''Устанавливает даты на кнопки в календаре.'''
+        for i in range(1, 43):
+            eval("self.p{}.setVisible(True)".format(i))
+
         mrange = monthrange(currentYear, currentMonth)
 
         for i in range(1, mrange[1] + 1):
@@ -616,6 +611,24 @@ class Ui_MainWindow(object):
             eval("self.p{}.setVisible(False)".format(i))
         for i in range(mrange[0] + mrange[1] + 1, 43):
             eval("self.p{}.setVisible(False)".format(i))
+
+    def set_active(self, currentMonth = datetime.now().month, currentYear = datetime.now().year):
+
+        db = sqlite3.connect("data.db")
+        cursor = db.cursor()
+
+        mrange = monthrange(currentYear, currentMonth)
+
+        for i in range(1, mrange[1] + 1):
+            query = "SELECT count() FROM Tasks WHERE date = ?"
+            date = str(currentYear) + '-' + str(currentMonth) + '-' + str(i)
+            row = (date,)
+            num_of_tasks = cursor.execute(query, row).fetchall()[0][0]
+
+            if num_of_tasks > 0:
+                eval("self.p{}.setStyleSheet(\"background-color: rgb(208, 255, 121);\\n\"\"border-color: rgb(0, 0, 0);\")".format(i + mrange[0]))
+            else:
+                eval("self.p{}.setStyleSheet(\"background-color: rgb(225, 225, 225);\\n\"\"border-color: rgb(0, 0, 0);\")".format(i + mrange[0]))
 
 
 if __name__ == "__main__":
