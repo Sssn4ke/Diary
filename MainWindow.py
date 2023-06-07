@@ -504,6 +504,13 @@ class Ui_MainWindow(object):
         self.actionBold.triggered.connect(lambda: self.change_font(self.actionBold.text()))
         self.actionNormal.triggered.connect(lambda: self.change_font(self.actionNormal.text()))
 
+        self.actionDefault.triggered.connect(lambda: self.change_button_color(self.actionDefault.text()))
+        self.actionGreen.triggered.connect(lambda: self.change_button_color(self.actionGreen.text()))
+        self.actionYellow.triggered.connect(lambda: self.change_button_color(self.actionYellow.text()))
+        self.actionBlue.triggered.connect(lambda: self.change_button_color(self.actionBlue.text()))
+        self.actionBlack.triggered.connect(lambda: self.change_button_color(self.actionBlack.text()))
+        self.actionWhite.triggered.connect(lambda: self.change_button_color(self.actionWhite.text()))
+
         self.actionExit.triggered.connect(lambda: self.exit_app())
 
 
@@ -629,6 +636,52 @@ class Ui_MainWindow(object):
                 eval("self.p{}.setStyleSheet(\"background-color: rgb(208, 255, 121);\\n\"\"border-color: rgb(0, 0, 0);\")".format(i + mrange[0]))
             else:
                 eval("self.p{}.setStyleSheet(\"background-color: rgb(225, 225, 225);\\n\"\"border-color: rgb(0, 0, 0);\")".format(i + mrange[0]))
+
+
+    def change_button_color(self, color):
+        if color == "Default":
+            for i in range(1, 43):
+                eval("self.p{}.setStyleSheet(\"background-color: rgb(159, 165, 160)\")".format(i))
+            self.Left_step.setStyleSheet("background-color: rgb(159, 165, 160);\n"
+                                         "border-radius: 20px;")
+            self.Right_step.setStyleSheet("background-color: rgb(159, 165, 160);\n"
+                                         "border-radius: 20px;")
+        if color == "Green":
+            for i in range(1, 43):
+                eval("self.p{}.setStyleSheet(\"background-color: rgb(0, 208, 0)\")".format(i))
+            self.Left_step.setStyleSheet("background-color: rgb(0, 208, 0);\n"
+                                         "border-radius: 20px;")
+            self.Right_step.setStyleSheet("background-color: rgb(0, 208, 0);\n"
+                                          "border-radius: 20px;")
+        if color == "Orange":
+            for i in range(1, 43):
+                eval("self.p{}.setStyleSheet(\"background-color: rgb(255, 159, 3)\")".format(i))
+            self.Left_step.setStyleSheet("background-color: rgb(255, 159, 3);\n"
+                                         "border-radius: 20px;")
+            self.Right_step.setStyleSheet("background-color: rgb(255, 159, 3);\n"
+                                          "border-radius: 20px;")
+        if color == "Blue":
+            for i in range(1, 43):
+                eval("self.p{}.setStyleSheet(\"background-color: rgb(85, 170, 255)\")".format(i))
+            self.Left_step.setStyleSheet("background-color: rgb(85, 170, 255);\n"
+                                         "border-radius: 20px;")
+            self.Right_step.setStyleSheet("background-color: rgb(85, 170, 255);\n"
+                                          "border-radius: 20px;")
+        if color == "Black":
+            for i in range(1, 43):
+                eval("self.p{}.setStyleSheet(\"background-color: rgb(0, 0, 0); color: rgb(255, 255, 255)\")".format(i))
+            self.Left_step.setStyleSheet("background-color: rgb(0, 0, 0);\n"
+                                         "border-radius: 20px;\n""color: rgb(255, 255, 255)")
+            self.Right_step.setStyleSheet("background-color: rgb(0, 0, 0);\n"
+                                          "border-radius: 20px;\n""color: rgb(255, 255, 255)")
+
+        if color == "White":
+            for i in range(1, 43):
+                eval("self.p{}.setStyleSheet(\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0)\")".format(i))
+            self.Left_step.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+                                         "border-radius: 20px;\n""color: rgb(0, 0, 0)")
+            self.Right_step.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+                                          "border-radius: 20px;\n""color: rgb(0, 0, 0)")
 
 
 if __name__ == "__main__":
