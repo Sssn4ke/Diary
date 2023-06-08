@@ -28,7 +28,7 @@ class Ui_MainWindow(object):
         self.Data_table.verticalHeader().setMinimumSectionSize(23)
         self.Data_table.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         self.Month_year = QtWidgets.QLabel(self.centralwidget)
-        self.Month_year.setGeometry(QtCore.QRect(290, 120, 220, 40))
+        self.Month_year.setGeometry(QtCore.QRect(270, 120, 260, 40))
         font = QtGui.QFont()
         font.setPointSize(18)
         self.Month_year.setFont(font)
@@ -524,7 +524,7 @@ class Ui_MainWindow(object):
         date = month_year[1] + '-' + str(month_year[0]) + '-' + opened_day
         self.window = QtWidgets.QMainWindow()
         self.ui = Ui_SecondWindow()
-        self.ui.setupUi(self.window, date)
+        self.ui.setupUi(self.window, date, self.css_styles)
         self.window.show()
 
     def update_window(self, difference):
@@ -550,28 +550,46 @@ class Ui_MainWindow(object):
 
     def change_background(self, background):
         '''Меняет задний фон приложения.'''
+        print(self.css_styles)
         if background == "Darkside":
+            self.css_styles[0] = "Darkside"
             self.label.setPixmap(QtGui.QPixmap())
             self.label.setStyleSheet("background-color: rgb(0, 0, 0);")
-            self.Month_year.setStyleSheet("color: rgb(255, 255, 255);")
+            if self.css_styles[1] == "Normal":
+                self.Month_year.setStyleSheet("color: rgb(255, 255, 255);")
+            elif self.css_styles[1] == "Bold":
+                self.Month_year.setStyleSheet("color: rgb(255, 255, 255); font-weight: bold;")
         elif background == "Whiteside":
+            self.css_styles[0] = "Whiteside"
             self.label.setPixmap(QtGui.QPixmap())
             self.label.setStyleSheet("background-color: rgb(255, 255, 255);")
-            self.Month_year.setStyleSheet("color: rgb(0, 0, 0)");
+            if self.css_styles[1] == "Normal":
+                self.Month_year.setStyleSheet("color: rgb(0, 0, 0);")
+            elif self.css_styles[1] == "Bold":
+                self.Month_year.setStyleSheet("color: rgb(0, 0, 0); font-weight: bold;")
         elif background == "Colorfulside":
+            self.css_styles[0] = "Colorfulside"
             self.label.setPixmap(QtGui.QPixmap("D:/Загрузки/background_of_diary.jpg"))
-            self.Month_year.setStyleSheet("color: rgb(0, 0, 0)");
+            if self.css_styles[1] == "Normal":
+                self.Month_year.setStyleSheet("color: rgb(0, 0, 0);")
+            elif self.css_styles[1] == "Bold":
+                self.Month_year.setStyleSheet("color: rgb(0, 0, 0); font-weight: bold;")
         elif background == "Yourside":
+            self.css_styles[0] = "Yourside"
             new_background = QFileDialog.getOpenFileName()[0]
             self.label.setPixmap(QtGui.QPixmap(new_background))
-            self.Month_year.setStyleSheet("color: rgb(255, 255, 255)");
+            if self.css_styles[1] == "Normal":
+                self.Month_year.setStyleSheet("color: rgb(255, 255, 255);")
+            elif self.css_styles[1] == "Bold":
+                self.Month_year.setStyleSheet("color: rgb(255, 255, 255); font-weight: bold;")
 
     def change_font(self, font):
         '''Меняет шрифт в приложении.'''
         if font == "Bold":
-            if self.get_backgroud_color() == "#000000":
+            self.css_styles[1] = "Bold"
+            if self.css_styles[0] == "Darkside" or self.css_styles[0] == "Yourside":
                 self.Month_year.setStyleSheet("font-weight: bold; color: rgb(255, 255, 255)");
-            else:
+            elif self.css_styles[0] == "Whiteside" or self.css_styles[0] == "Colorfulside":
                 self.Month_year.setStyleSheet("font-weight: bold; color: rgb(0, 0, 0)");
             self.Monday.setStyleSheet("font-weight: bold");
             self.Tuesday.setStyleSheet("font-weight: bold");
@@ -581,10 +599,11 @@ class Ui_MainWindow(object):
             self.Saturday.setStyleSheet("font-weight: bold");
             self.Sunday.setStyleSheet("font-weight: bold");
         elif font == "Normal":
-            if self.get_backgroud_color() == "#000000":
-                self.Month_year.setStyleSheet("font-weight: normal; color: rgb(255, 255, 255)");
-            else:
-                self.Month_year.setStyleSheet("font-weight: normal; color: rgb(0, 0, 0)");
+            self.css_styles[1] = "Normal"
+            if self.css_styles[0] == "Darkside" or self.css_styles[0] == "Yourside":
+                self.Month_year.setStyleSheet("color: rgb(255, 255, 255)");
+            elif self.css_styles[0] == "Whiteside" or self.css_styles[0] == "Colorfulside":
+                self.Month_year.setStyleSheet("color: rgb(0, 0, 0)");
             self.Monday.setStyleSheet("font-weight: normal");
             self.Tuesday.setStyleSheet("font-weight: normal");
             self.Wednesday.setStyleSheet("font-weight: normal");
@@ -593,6 +612,14 @@ class Ui_MainWindow(object):
             self.Saturday.setStyleSheet("font-weight: normal");
             self.Sunday.setStyleSheet("font-weight: normal");
 
+    def change_button_color(self, color):
+        self.css_styles[2] = color
+        print(self.css_styles)
+        month_year = self.Month_year.text().split()
+        month_year[0] = month_year[0][0] + month_year[0][1] + month_year[0][2]
+        abbr_to_num = {name: num for num, name in enumerate(calendar.month_abbr) if num}
+        month_year[0] = abbr_to_num[month_year[0]]
+        self.set_active(month_year[0], int(month_year[1]))
     def get_backgroud_color(self):
         '''Возвращает цвет заднего фона.'''
         return self.label.palette().window().color().name()
@@ -636,55 +663,46 @@ class Ui_MainWindow(object):
             num_of_tasks = cursor.execute(query, row).fetchall()[0][0]
 
             if num_of_tasks > 0:
-                eval("self.p{}.setStyleSheet(\"background-color: rgb(208, 255, 121);\\n\"\"border-color: rgb(0, 0, 0);\")".format(i + mrange[0]))
+                eval("self.p{}.setStyleSheet(\"background-color: rgb(208, 255, 121); border-color: rgb(0, 0, 0); border-width: 100px;\")".format(i + mrange[0]))
             else:
-                eval("self.p{}.setStyleSheet(\"background-color: rgb(159, 165, 160);\\n\"\"border-color: rgb(0, 0, 0);\")".format(i + mrange[0]))
+                if self.css_styles[2] == "Default":
+                    eval("self.p{}.setStyleSheet(\"background-color: rgb(159, 165, 160); border-color: rgb(0, 0, 0); border-width: 10px;\")".format(i + mrange[0]))
+                    self.Left_step.setStyleSheet("background-color: rgb(159, 165, 160);\n"
+                                                 "border-radius: 20px;")
+                    self.Right_step.setStyleSheet("background-color: rgb(159, 165, 160);\n"
+                                                  "border-radius: 20px;")
+                if self.css_styles[2] == "Green":
+                    eval("self.p{}.setStyleSheet(\"background-color: rgb(0, 208, 0); border-color: rgb(0, 0, 0); border-width: 10px;\")".format(i + mrange[0]))
+                    self.Left_step.setStyleSheet("background-color: rgb(0, 208, 0);\n"
+                                                 "border-radius: 20px;")
+                    self.Right_step.setStyleSheet("background-color: rgb(0, 208, 0);\n"
+                                                  "border-radius: 20px;")
+                if self.css_styles[2] == "Orange":
+                    eval("self.p{}.setStyleSheet(\"background-color: rgb(255, 159, 3); border-color: rgb(0, 0, 0); border-width: 10px;\")".format(i + mrange[0]))
+                    self.Left_step.setStyleSheet("background-color: rgb(255, 159, 3);\n"
+                                                 "border-radius: 20px;")
+                    self.Right_step.setStyleSheet("background-color: rgb(255, 159, 3);\n"
+                                                  "border-radius: 20px;")
+                if self.css_styles[2] == "Blue":
+                    eval("self.p{}.setStyleSheet(\"background-color: rgb(85, 170, 255); border-color: rgb(0, 0, 0); border-width: 10px;\")".format(i + mrange[0]))
+                    self.Left_step.setStyleSheet("background-color: rgb(85, 170, 255);\n"
+                                                 "border-radius: 20px;")
+                    self.Right_step.setStyleSheet("background-color: rgb(85, 170, 255);\n"
+                                                  "border-radius: 20px;")
+                if self.css_styles[2] == "Black":
+                    eval("self.p{}.setStyleSheet(\"background-color: rgb(0, 0, 0); color: rgb(255, 255, 255); border-color: rgb(0, 0, 0); border-width: 10px;\")".format(i + mrange[0]))
+                    self.Left_step.setStyleSheet("background-color: rgb(0, 0, 0);\n"
+                                                 "border-radius: 20px;\n""color: rgb(255, 255, 255)")
+                    self.Right_step.setStyleSheet("background-color: rgb(0, 0, 0);\n"
+                                                  "border-radius: 20px;\n""color: rgb(255, 255, 255)")
+                if self.css_styles[2] == "White":
+                    eval("self.p{}.setStyleSheet(\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); border-color: rgb(0, 0, 0); border-width: 10px;\")".format(i + mrange[0]))
+                    self.Left_step.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+                                                 "border-radius: 20px;\n""color: rgb(0, 0, 0)")
+                    self.Right_step.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+                                                  "border-radius: 20px;\n""color: rgb(0, 0, 0)")
 
-    def change_button_color(self, color):
-        if color == "Default":
-            for i in range(1, 43):
-                eval("self.p{}.setStyleSheet(\"background-color: rgb(159, 165, 160)\")".format(i))
-            self.Left_step.setStyleSheet("background-color: rgb(159, 165, 160);\n"
-                                         "border-radius: 20px;")
-            self.Right_step.setStyleSheet("background-color: rgb(159, 165, 160);\n"
-                                         "border-radius: 20px;")
-        if color == "Green":
-            for i in range(1, 43):
-                eval("self.p{}.setStyleSheet(\"background-color: rgb(0, 208, 0)\")".format(i))
-            self.Left_step.setStyleSheet("background-color: rgb(0, 208, 0);\n"
-                                         "border-radius: 20px;")
-            self.Right_step.setStyleSheet("background-color: rgb(0, 208, 0);\n"
-                                          "border-radius: 20px;")
-        if color == "Orange":
-            for i in range(1, 43):
-                eval("self.p{}.setStyleSheet(\"background-color: rgb(255, 159, 3)\")".format(i))
-            self.Left_step.setStyleSheet("background-color: rgb(255, 159, 3);\n"
-                                         "border-radius: 20px;")
-            self.Right_step.setStyleSheet("background-color: rgb(255, 159, 3);\n"
-                                          "border-radius: 20px;")
-        if color == "Blue":
-            for i in range(1, 43):
-                eval("self.p{}.setStyleSheet(\"background-color: rgb(85, 170, 255)\")".format(i))
-            self.Left_step.setStyleSheet("background-color: rgb(85, 170, 255);\n"
-                                         "border-radius: 20px;")
-            self.Right_step.setStyleSheet("background-color: rgb(85, 170, 255);\n"
-                                          "border-radius: 20px;")
-        if color == "Black":
-            for i in range(1, 43):
-                eval("self.p{}.setStyleSheet(\"background-color: rgb(0, 0, 0); color: rgb(255, 255, 255)\")".format(i))
-            self.Left_step.setStyleSheet("background-color: rgb(0, 0, 0);\n"
-                                         "border-radius: 20px;\n""color: rgb(255, 255, 255)")
-            self.Right_step.setStyleSheet("background-color: rgb(0, 0, 0);\n"
-                                          "border-radius: 20px;\n""color: rgb(255, 255, 255)")
-
-        if color == "White":
-            for i in range(1, 43):
-                eval("self.p{}.setStyleSheet(\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0)\")".format(i))
-            self.Left_step.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-                                         "border-radius: 20px;\n""color: rgb(0, 0, 0)")
-            self.Right_step.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-                                          "border-radius: 20px;\n""color: rgb(0, 0, 0)")
-
+    css_styles = ["Colorfulside", "Normal", "Default"]
 
 if __name__ == "__main__":
     import sys
