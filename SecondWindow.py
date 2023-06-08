@@ -161,6 +161,26 @@ class Ui_SecondWindow(object):
         db.commit()
 
         self.update_window(date)
+        self.update_ids()
+
+    def update_ids(self):
+        '''Обновляет слетевшие id.'''
+        db = sqlite3.connect("data.db")
+        cursor = db.cursor()
+
+        query = "SELECT count() FROM Tasks"
+        num_of_tasks = cursor.execute(query).fetchall()[0][0]
+        print(num_of_tasks)
+
+        cond1 = cursor.execute("select max(id) from Tasks").fetchall()[0]
+        cond2 = cursor.execute("select count(*) from Tasks").fetchall()[0]
+
+        while cond1[0] != cond2[0]:
+            cond1 = cursor.execute("select max(id) from Tasks").fetchall()[0]
+            cond2 = cursor.execute("select count(*) from Tasks").fetchall()[0]
+            cursor.execute("update Tasks set id = (select count(*) + 1 from Tasks t where t.id < Tasks.id) where id > (select min(Tasks.id) from Tasks left join Tasks next on Tasks.id+1 = next.id where next.id is null)")
+
+        db.commit()
 
     def update_tasks(self, date):
         '''Обновляет список с задачами из базы данных.'''
