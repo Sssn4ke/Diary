@@ -664,40 +664,40 @@ class Ui_MainWindow(object):
             num_of_tasks = cursor.execute(query, row).fetchall()[0][0]
 
             if num_of_tasks > 0:
-                eval("self.p{}.setStyleSheet(\"background-color: rgb(208, 255, 121); border-color: rgb(0, 0, 0); border-width: 100px;\")".format(i + mrange[0]))
+                eval("self.p{}.setStyleSheet(\"background-color: rgb(208, 255, 121);\")".format(i + mrange[0]))
             else:
                 if self.css_styles[2] == "Default":
-                    eval("self.p{}.setStyleSheet(\"background-color: rgb(159, 165, 160); border-color: rgb(0, 0, 0); border-width: 10px;\")".format(i + mrange[0]))
+                    eval("self.p{}.setStyleSheet(\"background-color: rgb(159, 165, 160);\")".format(i + mrange[0]))
                     self.Left_step.setStyleSheet("background-color: rgb(159, 165, 160);\n"
                                                  "border-radius: 20px;")
                     self.Right_step.setStyleSheet("background-color: rgb(159, 165, 160);\n"
                                                   "border-radius: 20px;")
                 if self.css_styles[2] == "Green":
-                    eval("self.p{}.setStyleSheet(\"background-color: rgb(0, 208, 0); border-color: rgb(0, 0, 0); border-width: 10px;\")".format(i + mrange[0]))
+                    eval("self.p{}.setStyleSheet(\"background-color: rgb(0, 208, 0);\")".format(i + mrange[0]))
                     self.Left_step.setStyleSheet("background-color: rgb(0, 208, 0);\n"
                                                  "border-radius: 20px;")
                     self.Right_step.setStyleSheet("background-color: rgb(0, 208, 0);\n"
                                                   "border-radius: 20px;")
                 if self.css_styles[2] == "Orange":
-                    eval("self.p{}.setStyleSheet(\"background-color: rgb(255, 159, 3); border-color: rgb(0, 0, 0); border-width: 10px;\")".format(i + mrange[0]))
+                    eval("self.p{}.setStyleSheet(\"background-color: rgb(255, 159, 3);\")".format(i + mrange[0]))
                     self.Left_step.setStyleSheet("background-color: rgb(255, 159, 3);\n"
                                                  "border-radius: 20px;")
                     self.Right_step.setStyleSheet("background-color: rgb(255, 159, 3);\n"
                                                   "border-radius: 20px;")
                 if self.css_styles[2] == "Blue":
-                    eval("self.p{}.setStyleSheet(\"background-color: rgb(85, 170, 255); border-color: rgb(0, 0, 0); border-width: 10px;\")".format(i + mrange[0]))
+                    eval("self.p{}.setStyleSheet(\"background-color: rgb(85, 170, 255);\")".format(i + mrange[0]))
                     self.Left_step.setStyleSheet("background-color: rgb(85, 170, 255);\n"
                                                  "border-radius: 20px;")
                     self.Right_step.setStyleSheet("background-color: rgb(85, 170, 255);\n"
                                                   "border-radius: 20px;")
                 if self.css_styles[2] == "Black":
-                    eval("self.p{}.setStyleSheet(\"background-color: rgb(0, 0, 0); color: rgb(255, 255, 255); border-color: rgb(0, 0, 0); border-width: 10px;\")".format(i + mrange[0]))
+                    eval("self.p{}.setStyleSheet(\"background-color: rgb(0, 0, 0); color: rgb(255, 255, 255);\")".format(i + mrange[0]))
                     self.Left_step.setStyleSheet("background-color: rgb(0, 0, 0);\n"
                                                  "border-radius: 20px;\n""color: rgb(255, 255, 255)")
                     self.Right_step.setStyleSheet("background-color: rgb(0, 0, 0);\n"
                                                   "border-radius: 20px;\n""color: rgb(255, 255, 255)")
                 if self.css_styles[2] == "White":
-                    eval("self.p{}.setStyleSheet(\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); border-color: rgb(0, 0, 0); border-width: 10px;\")".format(i + mrange[0]))
+                    eval("self.p{}.setStyleSheet(\"background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\")".format(i + mrange[0]))
                     self.Left_step.setStyleSheet("background-color: rgb(255, 255, 255);\n"
                                                  "border-radius: 20px;\n""color: rgb(0, 0, 0)")
                     self.Right_step.setStyleSheet("background-color: rgb(255, 255, 255);\n"
