@@ -206,7 +206,7 @@ class Ui_SecondWindow(object):
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    SecondWindow = QtWidgets.QWidget()
+    SecondWindow = QWidget.QMainWindow()
     ui = Ui_SecondWindow()
     ui.setupUi(SecondWindow)
     SecondWindow.show()
