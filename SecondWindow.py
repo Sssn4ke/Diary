@@ -3,10 +3,11 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import *
 
 class Ui_SecondWindow(object):
-    def setupUi(self, SecondWindow, today_date):
+    def setupUi(self, SecondWindow, today_date, css_styles):
         '''Строит дерево виджетов и элементы интерфейса.'''
         SecondWindow.setObjectName("SecondWindow")
         SecondWindow.resize(400, 600)
+        self.css_styles = css_styles
         self.centralwidget = QtWidgets.QWidget(SecondWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.timeEdit = QtWidgets.QTimeEdit(self.centralwidget)
@@ -19,6 +20,7 @@ class Ui_SecondWindow(object):
         self.listWidget.setGeometry(QtCore.QRect(50, 210, 300, 260))
         self.listWidget.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
         self.listWidget.setObjectName("listWidget")
+        self.listWidget.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         self.button_for_adding = QtWidgets.QPushButton(self.centralwidget)
         self.button_for_adding.setGeometry(QtCore.QRect(250, 120, 90, 70))
         font = QtGui.QFont()
@@ -86,6 +88,7 @@ class Ui_SecondWindow(object):
     def add_functions(self, today_date):
         '''Добавляет все необходимые функции для корректной работы приложения.'''
         self.update_window(today_date)
+        self.update_styles()
 
         self.button_for_adding.clicked.connect(lambda: self.add_task(self.textEdit.toPlainText(), today_date))
         self.button_for_save.clicked.connect(lambda: self.save_changes(today_date))
@@ -97,6 +100,7 @@ class Ui_SecondWindow(object):
 
     def add_task(self, new_task, date):
         '''Добавляет задачу в базу данных.'''
+        new_task = new_task.replace('\n', '')
         if new_task != "":
             db = sqlite3.connect("data.db")
             cursor = db.cursor()
@@ -202,6 +206,50 @@ class Ui_SecondWindow(object):
 
         percentage = num_of_completed_tasks / num_of_tasks * 100 if num_of_tasks != 0 else 0
         self.progressBar.setValue(percentage)
+
+    def update_styles(self):
+        if self.css_styles[2] == "Default":
+            self.button_for_save.setStyleSheet("background-color: rgb(159, 165, 160);\n"
+                                               "border-radius: 20px;")
+            self.button_for_adding.setStyleSheet("background-color: rgb(159, 165, 160);\n"
+                                                 "border-radius: 20px;")
+            self.button_for_removing.setStyleSheet("background-color: rgb(159, 165, 160);\n"
+                                                   "border-radius: 20px;")
+        if self.css_styles[2] == "Green":
+            self.button_for_save.setStyleSheet("background-color: rgb(0, 208, 0);\n"
+                                               "border-radius: 20px;")
+            self.button_for_adding.setStyleSheet("background-color: rgb(0, 208, 0);\n"
+                                                 "border-radius: 20px;")
+            self.button_for_removing.setStyleSheet("background-color: rgb(0, 208, 0);\n"
+                                                   "border-radius: 20px;")
+        if self.css_styles[2] == "Orange":
+            self.button_for_save.setStyleSheet("background-color: rgb(255, 159, 3);\n"
+                                               "border-radius: 20px;")
+            self.button_for_adding.setStyleSheet("background-color: rgb(255, 159, 3);\n"
+                                                 "border-radius: 20px;")
+            self.button_for_removing.setStyleSheet("background-color: rgb(255, 159, 3);\n"
+                                                   "border-radius: 20px;")
+        if self.css_styles[2] == "Blue":
+            self.button_for_save.setStyleSheet("background-color: rgb(85, 170, 255);\n"
+                                               "border-radius: 20px;")
+            self.button_for_adding.setStyleSheet("background-color: rgb(85, 170, 255);\n"
+                                                 "border-radius: 20px;")
+            self.button_for_removing.setStyleSheet("background-color: rgb(85, 170, 255);\n"
+                                                   "border-radius: 20px;")
+        if self.css_styles[2] == "Black":
+            self.button_for_save.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+                                               "border-radius: 20px;")
+            self.button_for_adding.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+                                                 "border-radius: 20px;")
+            self.button_for_removing.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+                                                   "border-radius: 20px;")
+        if self.css_styles[2] == "White":
+            self.button_for_save.setStyleSheet("background-color: rgb(0, 0, 0);\n"
+                                               "border-radius: 20px;")
+            self.button_for_adding.setStyleSheet("background-color: rgb(0, 0, 0);\n"
+                                                 "border-radius: 20px;")
+            self.button_for_removing.setStyleSheet("background-color: rgb(0, 0, 0);\n"
+                                                   "border-radius: 20px;")
 
 if __name__ == "__main__":
     import sys
