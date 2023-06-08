@@ -528,6 +528,7 @@ class Ui_MainWindow(object):
         self.window.show()
 
     def update_window(self, difference):
+        '''Обновляет главное окно и устанавливает активные кнопки.'''
         month_year = self.Month_year.text().split()
         month_year[0] = month_year[0][0] + month_year[0][1] + month_year[0][2]
         abbr_to_num = {name: num for num, name in enumerate(calendar.month_abbr) if num}
@@ -613,6 +614,7 @@ class Ui_MainWindow(object):
             self.Sunday.setStyleSheet("font-weight: normal");
 
     def change_button_color(self, color):
+        '''Меняет цвет кнопок.'''
         self.css_styles[2] = color
         print(self.css_styles)
         month_year = self.Month_year.text().split()
@@ -620,6 +622,7 @@ class Ui_MainWindow(object):
         abbr_to_num = {name: num for num, name in enumerate(calendar.month_abbr) if num}
         month_year[0] = abbr_to_num[month_year[0]]
         self.set_active(month_year[0], int(month_year[1]))
+
     def get_backgroud_color(self):
         '''Возвращает цвет заднего фона.'''
         return self.label.palette().window().color().name()
@@ -647,7 +650,7 @@ class Ui_MainWindow(object):
             eval("self.p{}.setVisible(False)".format(i))
 
     def set_active(self, currentMonth = datetime.now().month, currentYear = datetime.now().year):
-
+        '''Устанавливает активные кнопки.'''
         db = sqlite3.connect("data.db")
         cursor = db.cursor()
 

@@ -95,6 +95,7 @@ class Ui_SecondWindow(object):
         self.button_for_removing.clicked.connect(lambda: self.remove_task(today_date))
 
     def update_window(self, date):
+        '''Обновляет задачи и прогресс в окне.'''
         self.update_tasks(date)
         self.update_progress_bar(date)
 
@@ -194,6 +195,7 @@ class Ui_SecondWindow(object):
         self.update_window(date)
 
     def update_progress_bar(self, date):
+        '''Обновляет шкалу прогресса.'''
         db = sqlite3.connect("data.db")
         cursor = db.cursor()
 
@@ -208,6 +210,7 @@ class Ui_SecondWindow(object):
         self.progressBar.setValue(percentage)
 
     def update_styles(self):
+        '''Устанавливает цвет кнопок.'''
         if self.css_styles[2] == "Default":
             self.button_for_save.setStyleSheet("background-color: rgb(159, 165, 160);\n"
                                                "border-radius: 20px;")
