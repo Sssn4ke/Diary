@@ -3,11 +3,11 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import *
 
 class Ui_SecondWindow(object):
-    def setupUi(self, SecondWindow, today_date, css_styles):
+    def setupUi(self, Mainwin_obj, SecondWindow, today_date):
         '''Строит дерево виджетов и элементы интерфейса.'''
+        self.Mainwin_obj = Mainwin_obj
         SecondWindow.setObjectName("SecondWindow")
         SecondWindow.resize(400, 600)
-        self.css_styles = css_styles
         self.centralwidget = QtWidgets.QWidget(SecondWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.timeEdit = QtWidgets.QTimeEdit(self.centralwidget)
@@ -102,6 +102,15 @@ class Ui_SecondWindow(object):
     def add_task(self, new_task, date):
         '''Добавляет задачу в базу данных.'''
         new_task = new_task.replace('\n', '')
+        if new_task == ' ':
+            new_task = ''
+        for i in range(len(new_task)):
+            if new_task[i] != ' ':
+                break
+            elif new_task[i+1] == ' ':
+                new_task = ''
+                break
+
         if new_task != "":
             db = sqlite3.connect("data.db")
             cursor = db.cursor()
@@ -125,7 +134,15 @@ class Ui_SecondWindow(object):
             db.commit()
 
             self.update_window(date)
-            self.textEdit.clear()
+        else:
+            messageBox = QMessageBox()
+            messageBox.setStyleSheet("min-width: 200px;");
+            messageBox.setWindowTitle("Notification")
+            messageBox.setText("Can't add! Wrong input!")
+            messageBox.setStandardButtons(QMessageBox.Ok)
+            messageBox.exec()
+
+        self.textEdit.clear()
 
     def remove_task(self, date):
         '''Удаляет задачу'''
@@ -194,6 +211,8 @@ class Ui_SecondWindow(object):
 
         self.update_window(date)
 
+        self.Mainwin_obj.set_active()
+
     def update_progress_bar(self, date):
         '''Обновляет шкалу прогресса.'''
         db = sqlite3.connect("data.db")
@@ -211,48 +230,54 @@ class Ui_SecondWindow(object):
 
     def update_styles(self):
         '''Устанавливает цвет кнопок.'''
-        if self.css_styles[2] == "Default":
+        if self.Mainwin_obj.css_styles[2] == "Default":
             self.button_for_save.setStyleSheet("background-color: rgb(159, 165, 160);\n"
                                                "border-radius: 20px;")
             self.button_for_adding.setStyleSheet("background-color: rgb(159, 165, 160);\n"
                                                  "border-radius: 20px;")
             self.button_for_removing.setStyleSheet("background-color: rgb(159, 165, 160);\n"
                                                    "border-radius: 20px;")
-        if self.css_styles[2] == "Green":
+        if self.Mainwin_obj.css_styles[2] == "Green":
             self.button_for_save.setStyleSheet("background-color: rgb(0, 208, 0);\n"
                                                "border-radius: 20px;")
             self.button_for_adding.setStyleSheet("background-color: rgb(0, 208, 0);\n"
                                                  "border-radius: 20px;")
             self.button_for_removing.setStyleSheet("background-color: rgb(0, 208, 0);\n"
                                                    "border-radius: 20px;")
-        if self.css_styles[2] == "Orange":
+        if self.Mainwin_obj.css_styles[2] == "Orange":
             self.button_for_save.setStyleSheet("background-color: rgb(255, 159, 3);\n"
                                                "border-radius: 20px;")
             self.button_for_adding.setStyleSheet("background-color: rgb(255, 159, 3);\n"
                                                  "border-radius: 20px;")
             self.button_for_removing.setStyleSheet("background-color: rgb(255, 159, 3);\n"
                                                    "border-radius: 20px;")
-        if self.css_styles[2] == "Blue":
+        if self.Mainwin_obj.css_styles[2] == "Blue":
             self.button_for_save.setStyleSheet("background-color: rgb(85, 170, 255);\n"
                                                "border-radius: 20px;")
             self.button_for_adding.setStyleSheet("background-color: rgb(85, 170, 255);\n"
                                                  "border-radius: 20px;")
             self.button_for_removing.setStyleSheet("background-color: rgb(85, 170, 255);\n"
                                                    "border-radius: 20px;")
-        if self.css_styles[2] == "Black":
-            self.button_for_save.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-                                               "border-radius: 20px;")
-            self.button_for_adding.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-                                                 "border-radius: 20px;")
-            self.button_for_removing.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-                                                   "border-radius: 20px;")
-        if self.css_styles[2] == "White":
+        if self.Mainwin_obj.css_styles[2] == "Black":
             self.button_for_save.setStyleSheet("background-color: rgb(0, 0, 0);\n"
-                                               "border-radius: 20px;")
+                                               "border-radius: 20px;\n"
+                                               "color: rgb(255, 255, 255)")
             self.button_for_adding.setStyleSheet("background-color: rgb(0, 0, 0);\n"
-                                                 "border-radius: 20px;")
+                                                 "border-radius: 20px;\n"
+                                               "color: rgb(255, 255, 255)")
             self.button_for_removing.setStyleSheet("background-color: rgb(0, 0, 0);\n"
-                                                   "border-radius: 20px;")
+                                                   "border-radius: 20px;\n"
+                                               "color: rgb(255, 255, 255)")
+        if self.Mainwin_obj.css_styles[2] == "White":
+            self.button_for_save.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+                                               "border-radius: 20px;\n"
+                                               "color: rgb(0, 0, 0)")
+            self.button_for_adding.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+                                                 "border-radius: 20px;\n"
+                                               "color: rgb(0, 0, 0)")
+            self.button_for_removing.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+                                                   "border-radius: 20px;\n"
+                                               "color: rgb(0, 0, 0)")
 
 if __name__ == "__main__":
     import sys

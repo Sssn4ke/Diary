@@ -524,7 +524,7 @@ class Ui_MainWindow(object):
         date = month_year[1] + '-' + str(month_year[0]) + '-' + opened_day
         self.window = QtWidgets.QMainWindow()
         self.ui = Ui_SecondWindow()
-        self.ui.setupUi(self.window, date, self.css_styles)
+        self.ui.setupUi(ui, self.window, date)
         self.window.show()
 
     def update_window(self, difference):
@@ -551,7 +551,6 @@ class Ui_MainWindow(object):
 
     def change_background(self, background):
         '''Меняет задний фон приложения.'''
-        print(self.css_styles)
         if background == "Darkside":
             self.css_styles[0] = "Darkside"
             self.label.setPixmap(QtGui.QPixmap())
@@ -616,7 +615,6 @@ class Ui_MainWindow(object):
     def change_button_color(self, color):
         '''Меняет цвет кнопок.'''
         self.css_styles[2] = color
-        print(self.css_styles)
         month_year = self.Month_year.text().split()
         month_year[0] = month_year[0][0] + month_year[0][1] + month_year[0][2]
         abbr_to_num = {name: num for num, name in enumerate(calendar.month_abbr) if num}
