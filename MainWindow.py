@@ -26,8 +26,9 @@ class Ui_MainWindow(object):
         self.Data_table.verticalHeader().setVisible(False)
         self.Data_table.verticalHeader().setDefaultSectionSize(30)
         self.Data_table.verticalHeader().setMinimumSectionSize(23)
+        self.Data_table.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         self.Month_year = QtWidgets.QLabel(self.centralwidget)
-        self.Month_year.setGeometry(QtCore.QRect(290, 120, 220, 30))
+        self.Month_year.setGeometry(QtCore.QRect(290, 120, 220, 40))
         font = QtGui.QFont()
         font.setPointSize(18)
         self.Month_year.setFont(font)
@@ -513,7 +514,6 @@ class Ui_MainWindow(object):
 
         self.actionExit.triggered.connect(lambda: self.exit_app())
 
-
     def openWindow(self, opened_day):
         '''Открывает окно SecondWindow.py при нажатии на кнопку в календаре.'''
         month_year = self.Month_year.text().split()
@@ -624,6 +624,9 @@ class Ui_MainWindow(object):
         db = sqlite3.connect("data.db")
         cursor = db.cursor()
 
+        cursor.execute("CREATE TABLE IF NOT EXISTS Tasks (id INTEGER Primary key, task TEXT NOT NULL, completed INTEGER, date TEXT)")
+        db.commit()
+
         mrange = monthrange(currentYear, currentMonth)
 
         for i in range(1, mrange[1] + 1):
@@ -635,8 +638,7 @@ class Ui_MainWindow(object):
             if num_of_tasks > 0:
                 eval("self.p{}.setStyleSheet(\"background-color: rgb(208, 255, 121);\\n\"\"border-color: rgb(0, 0, 0);\")".format(i + mrange[0]))
             else:
-                eval("self.p{}.setStyleSheet(\"background-color: rgb(225, 225, 225);\\n\"\"border-color: rgb(0, 0, 0);\")".format(i + mrange[0]))
-
+                eval("self.p{}.setStyleSheet(\"background-color: rgb(159, 165, 160);\\n\"\"border-color: rgb(0, 0, 0);\")".format(i + mrange[0]))
 
     def change_button_color(self, color):
         if color == "Default":
