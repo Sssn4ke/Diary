@@ -211,7 +211,9 @@ class Ui_SecondWindow(object):
 
         self.update_window(date)
 
-        self.Mainwin_obj.set_active()
+        year = date[0] + date[1] + date[2] + date[3]
+        month = date[5] if date[6] == '-' else date[5] + date[6]
+        self.Mainwin_obj.set_active(int(month), int(year))
 
     def update_progress_bar(self, date):
         '''Обновляет шкалу прогресса.'''
